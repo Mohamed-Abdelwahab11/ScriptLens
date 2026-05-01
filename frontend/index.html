@@ -3,57 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScriptLens | Global Cinematic AI</title>
+    <title>ScriptLens | Production Command Center</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.tailwindcss.com/"></script>
+    <!-- Library to read PDFs locally -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
     <style>
         body { background-color: #0f172a; color: #f1f5f9; font-family: 'Inter', sans-serif; }
-        .glass-input { background: rgba(30, 41, 59, 0.5); backdrop-filter: blur(10px); border: 1px solid #334155; }
-        #shotChart { max-height: 250px !important; }
+        .glass-card { 
+            background: rgba(15, 23, 42, 0.7); 
+            backdrop-filter: blur(24px); 
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255,255,255,0.1); 
+            z-index: 10;
+            position: relative;
+        }
+        .chart-container {
+            height: 280px;
+            position: relative;
+            width: 100%;
+        }
+        .badge-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.375rem;
+            font-size: 0.5625rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.2);
+            backdrop-filter: blur(8px);
+        }
+        .badge-angle { background: rgba(168,85,247,0.15); color: #d8b4fe; border: 1px solid rgba(168,85,247,0.4); }
+        .badge-movement { background: rgba(245,158,11,0.15); color: #fcd34d; border: 1px solid rgba(245,158,11,0.4); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .shot-block { transition: all 0.2s ease; cursor: crosshair; }
+        .shot-block:hover { filter: brightness(1.5); transform: scaleY(1.1); }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center py-12">
-
-    <div class="w-full max-w-6xl mx-auto p-6 space-y-12">
-        <header class="text-center space-y-3">
-            <h1 class="text-6xl font-extrabold text-white tracking-tight">ScriptLens AI</h1>
-            <p class="text-xl text-slate-400 max-w-2xl mx-auto">Director's Global Cinematic Breakdown Engine</p>
+<body class="min-h-screen pb-20">
+    <div class="max-w-7xl mx-auto px-6 py-12 space-y-10">
+        <header class="flex justify-between items-end">
+            <div>
+                <h1 class="text-5xl font-black text-white tracking-tighter">ScriptLens <span class="text-blue-500">v2.0</span></h1>
+                <p class="text-slate-400 font-medium italic">Global Cinematic Breakdown Engine</p>
+            </div>
+            <div class="text-right">
+                <div class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Total Runtime</div>
+                <div id="totalDurationText" class="text-4xl font-mono text-blue-400 font-bold">00:00</div>
+            </div>
         </header>
 
-        <div class="glass-input p-10 rounded-3xl shadow-2xl space-y-5">
-            <textarea id="scriptInput" rows="8" class="w-full bg-slate-900 text-slate-100 p-5 rounded-2xl border border-slate-700 focus:border-blue-500 outline-none font-mono text-sm" placeholder="Paste your screenplay here..."></textarea>
-            <div class="flex justify-end">
-                <button id="analyzeBtn" onclick="runAnalysis()" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-10 rounded-2xl transition-all shadow-[0_0_30px_rgba(37,99,235,0.4)]">
-                    Generate Intelligence 🎬
-                </button>
-            </div>
-        </div>
-
-        <!-- Analytics Section -->
-        <div id="analyticsSection" class="hidden grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="glass-input p-8 rounded-3xl border-t-4 border-t-emerald-500">
-                <h3 class="text-white font-bold mb-4">Visual Rhythm</h3>
-                <canvas id="shotChart"></canvas>
-            </div>
-            
-            <div class="glass-input p-8 rounded-3xl border-t-4 border-t-blue-500 flex flex-col justify-center text-center">
-                <h3 class="text-slate-400 font-semibold uppercase tracking-widest text-xs mb-4">Cinematic Pacing Score</h3>
-                <div id="pacingText" class="text-7xl font-black text-white italic">0.0</div>
-                <div class="w-full bg-slate-800 h-2 mt-6 rounded-full overflow-hidden">
-                    <!-- تم تصفير الـ width هنا ليبدأ من 0 -->
-                    <div id="pacingBar" class="bg-blue-500 h-full transition-all duration-1000" style="width: 0%"></div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 space-y-6">
+                <div class="glass-card p-8 rounded-[2.5rem] shadow-2xl">
+                    <div class="flex justify-between mb-4">
+                        <label class="text-xs font-black uppercase tracking-widest text-slate-500">Screenplay Content</label>
+                        <div class="space-x-4">
+                            <input type="file" id="pdfUpload" class="hidden" accept=".pdf">
+                            <button onclick="document.getElementById('pdfUpload').click()" class="text-[10px] font-black text-blue-400 hover:text-white transition-all border border-blue-400/30 px-3 py-1 rounded-lg">📁 ATTACH PDF</button>
+                        </div>
+                    </div>
+                    <textarea id="scriptInput" rows="10" class="w-full bg-slate-900/50 text-slate-200 p-6 rounded-2xl border border-slate-700/50 focus:border-blue-500 outline-none font-mono text-sm" placeholder="Paste script or upload PDF to auto-fill..."></textarea>
                 </div>
             </div>
+            
+            <div class="space-y-6">
+                <div class="glass-card p-8 rounded-[2.5rem] border-l-4 border-l-orange-500">
+                    <label class="text-xs font-black uppercase tracking-widest text-slate-500 block mb-4">Logline Audit</label>
+                    <textarea id="loglineInput" rows="3" class="w-full bg-slate-900/50 text-slate-200 p-4 rounded-xl border border-slate-700/50 focus:border-orange-500 outline-none text-sm" placeholder="Core conflict/Logline..."></textarea>
+                    <div id="auditStatusText" class="mt-4 text-[10px] font-black uppercase tracking-widest text-slate-600 italic">Audit: Pending Analysis</div>
+                </div>
+                <button id="analyzeBtn" onclick="runAnalysis()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-6 rounded-[2rem] transition-all shadow-xl tracking-widest">RUN INTELLIGENCE 🎬</button>
+            </div>
         </div>
 
-        <div id="loading" class="hidden text-center py-10">
-            <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-blue-500 mb-4"></div>
-            <p class="text-blue-400 font-bold uppercase text-xs">Consulting Global Film Archive...</p>
+        <div id="analyticsSection" class="hidden space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-6 rounded-[2.5rem]"><div class="chart-container"><canvas id="shotChart"></canvas></div></div>
+                <div class="glass-card p-6 rounded-[2.5rem]"><div class="chart-container"><canvas id="storyArcChart"></canvas></div></div>
+                <div class="glass-card p-8 rounded-[2.5rem] flex flex-col justify-center text-center">
+                    <h3 class="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-4">Pacing Rhythm</h3>
+                    <div id="pacingText" class="text-7xl font-black text-white italic">0.0</div>
+                    <div class="w-full bg-slate-800 h-1.5 mt-6 rounded-full overflow-hidden">
+                        <div id="pacingBar" class="bg-blue-500 h-full transition-all duration-1000" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card p-8 rounded-[2.5rem]">
+                <h3 class="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-6">Visual Rhythm (Timeline View)</h3>
+                <div id="visualRhythmTimeline" class="flex items-center h-16 w-full overflow-x-auto no-scrollbar rounded-xl bg-black/20 p-4"></div>
+            </div>
         </div>
 
-        <div id="resultsContainer" class="hidden space-y-8"></div>
+        <div id="loading" class="hidden text-center py-20">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-blue-500 mb-4"></div>
+            <p class="text-blue-400 font-black text-[10px] tracking-[0.3em]">PROCESSING CINEMATIC DATA...</p>
+        </div>
+        <div id="resultsContainer" class="hidden space-y-12"></div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
