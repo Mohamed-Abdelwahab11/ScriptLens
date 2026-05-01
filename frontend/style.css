@@ -1,0 +1,190 @@
+/* Base Theme */
+body {
+    background-color: #0f172a;
+    color: #e2e8f0;
+    font-family: system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Typography */
+header {
+    text-align: center;
+}
+
+.gradient-text {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0;
+    background: linear-gradient(to right, #60a5fa, #34d399);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.subtitle {
+    color: #94a3b8;
+    margin-top: 0.5rem;
+}
+
+/* UI Components */
+.glass-panel {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid #334155;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}
+
+label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #cbd5e1;
+    margin-bottom: 0.5rem;
+}
+
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #0f172a;
+    color: #f1f5f9;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid #475569;
+    outline: none;
+    resize: vertical;
+    font-family: inherit;
+}
+
+textarea:focus {
+    border-color: #3b82f6;
+}
+
+/* Buttons & State */
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.btn-primary {
+    background-color: #2563eb;
+    color: white;
+    font-weight: bold;
+    padding: 0.75rem 2rem;
+    border-radius: 0.75rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #3b82f6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.loading-text {
+    text-align: center;
+    color: #60a5fa;
+    font-weight: bold;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .5;
+    }
+}
+
+/* Generated Shot Cards */
+.scene-card {
+    border-left: 4px solid #3b82f6;
+    margin-bottom: 1.5rem;
+}
+
+.scene-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.scene-title {
+    margin: 0;
+    color: white;
+    font-size: 1.25rem;
+}
+
+.scene-cast {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #94a3b8;
+}
+
+.cast-names {
+    color: #93c5fd;
+}
+
+.scene-badge {
+    background: #1e293b;
+    color: #94a3b8;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+}
+
+.shot-container {
+    margin-top: 1rem;
+}
+
+.shot-title {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.shot-item {
+    background: #1e293b;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid #334155;
+    margin-top: 0.5rem;
+}
+
+.shot-type {
+    color: #34d399;
+    font-weight: bold;
+}
+
+.shot-conf {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-left: 0.5rem;
+}
+
+.shot-reason {
+    font-size: 0.875rem;
+    color: #cbd5e1;
+    margin-top: 0.25rem;
+}

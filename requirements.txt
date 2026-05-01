@@ -1,0 +1,12 @@
+# Data Processing
+pandas
+numpy
+
+# Natural Language Processing
+spacy
+nltk
+transformers
+pymupdf
+spacy
+# Interface
+streamlit

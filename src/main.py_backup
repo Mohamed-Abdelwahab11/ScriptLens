@@ -1,0 +1,36 @@
+import sys
+import os
+
+# BASE_PATH is ScriptLens/src
+BASE_PATH = os.path.dirname(os.path.abspath(__file__))
+
+# PROJECT_ROOT is ScriptLens/
+PROJECT_ROOT = os.path.dirname(BASE_PATH)
+
+if BASE_PATH not in sys.path:
+    sys.path.append(BASE_PATH)
+
+from core.parser import ScriptParser # pyright: ignore[reportMissingImports]
+
+def main():
+    print("--- [ScriptLens AI Engine: Production Mode] ---")
+    engine = ScriptParser()
+    
+    # Path logic updated to find the file in ScriptLens/data/raw/
+    target_script = os.path.join(PROJECT_ROOT, "data", "raw", "test_script.pdf")
+    
+    if os.path.exists(target_script):
+        results = engine.parse(target_script)
+        
+        print(f"Status: Success | Extracted {results['stats']['scene_count']} scenes.")
+        print(f"Entities: Identified {results['stats']['character_count']} unique characters.")
+        print(f"Cinematography: Detected {results['stats']['visual_cues_count']} visual cues.")
+        
+        if results['details']['detected_visual_cues']:
+            # Listing all cues found to verify the 'CLOSE' and 'WIDE' logic
+            print(f"Cues List: {', '.join(results['details']['detected_visual_cues'])}")
+    else:
+        print(f"System Alert: Target file not found at {target_script}")
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScriptLens | Global Cinematic AI</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <style>
+        body { background-color: #0f172a; color: #f1f5f9; font-family: 'Inter', sans-serif; }
+        .glass-input { background: rgba(30, 41, 59, 0.5); backdrop-filter: blur(10px); border: 1px solid #334155; }
+        #shotChart { max-height: 250px !important; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-12">
+
+    <div class="w-full max-w-6xl mx-auto p-6 space-y-12">
+        <header class="text-center space-y-3">
+            <h1 class="text-6xl font-extrabold text-white tracking-tight">ScriptLens AI</h1>
+            <p class="text-xl text-slate-400 max-w-2xl mx-auto">Director's Global Cinematic Breakdown Engine</p>
+        </header>
+
+        <div class="glass-input p-10 rounded-3xl shadow-2xl space-y-5">
+            <textarea id="scriptInput" rows="8" class="w-full bg-slate-900 text-slate-100 p-5 rounded-2xl border border-slate-700 focus:border-blue-500 outline-none font-mono text-sm" placeholder="Paste your screenplay here..."></textarea>
+            <div class="flex justify-end">
+                <button id="analyzeBtn" onclick="runAnalysis()" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-10 rounded-2xl transition-all shadow-[0_0_30px_rgba(37,99,235,0.4)]">
+                    Generate Intelligence 🎬
+                </button>
+            </div>
+        </div>
+
+        <!-- Analytics Section -->
+        <div id="analyticsSection" class="hidden grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="glass-input p-8 rounded-3xl border-t-4 border-t-emerald-500">
+                <h3 class="text-white font-bold mb-4">Visual Rhythm</h3>
+                <canvas id="shotChart"></canvas>
+            </div>
+            
+            <div class="glass-input p-8 rounded-3xl border-t-4 border-t-blue-500 flex flex-col justify-center text-center">
+                <h3 class="text-slate-400 font-semibold uppercase tracking-widest text-xs mb-4">Cinematic Pacing Score</h3>
+                <div id="pacingText" class="text-7xl font-black text-white italic">0.0</div>
+                <div class="w-full bg-slate-800 h-2 mt-6 rounded-full overflow-hidden">
+                    <!-- تم تصفير الـ width هنا ليبدأ من 0 -->
+                    <div id="pacingBar" class="bg-blue-500 h-full transition-all duration-1000" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loading" class="hidden text-center py-10">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-blue-500 mb-4"></div>
+            <p class="text-blue-400 font-bold uppercase text-xs">Consulting Global Film Archive...</p>
+        </div>
+
+        <div id="resultsContainer" class="hidden space-y-8"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
