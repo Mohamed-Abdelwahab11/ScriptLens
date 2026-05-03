@@ -7,6 +7,12 @@ spacy
 nltk
 transformers
 pymupdf
-spacy
+
+# Backend
+fastapi
+uvicorn
+groq
+python-dotenv
+
 # Interface
 streamlit

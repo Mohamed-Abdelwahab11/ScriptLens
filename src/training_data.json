@@ -1,0 +1,3677 @@
+{
+  "version": "1.0",
+  "description": "Ground truth cinematic metrics for real films. Used by the ML Calibration Layer to compute error rates and self-correct pacing multipliers.",
+  "films": [
+    {
+      "title": "The Godfather",
+      "year": 1972,
+      "director": "Francis Ford Coppola",
+      "genre": [
+        "Drama",
+        "Crime"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 175,
+      "script_word_count": 19950,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 6.5,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.3,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:36.691891",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "Mad Max: Fury Road",
+      "year": 2015,
+      "director": "George Miller",
+      "genre": [
+        "Action",
+        "Adventure",
+        "Science Fiction"
+      ],
+      "pacing_profile": "rapid_fire",
+      "actual_runtime_minutes": 121,
+      "script_word_count": 4719,
+      "words_per_second_ground_truth": 0.65,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 1.8,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 0.4,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:22.922006",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "Before Sunset",
+      "year": 2004,
+      "director": "Richard Linklater",
+      "genre": [
+        "Drama",
+        "Romance"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 80,
+      "script_word_count": 9120,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 45.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 5.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:38.190923",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "Parasite",
+      "year": 2019,
+      "director": "Bong Joon Ho",
+      "genre": [
+        "Comedy",
+        "Thriller",
+        "Drama"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 133,
+      "script_word_count": 7182,
+      "words_per_second_ground_truth": 0.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.2,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.04,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:51.921231",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "2001: A Space Odyssey",
+      "year": 1968,
+      "director": "Stanley Kubrick",
+      "genre": [
+        "Science Fiction",
+        "Mystery",
+        "Adventure"
+      ],
+      "pacing_profile": "meditative",
+      "actual_runtime_minutes": 149,
+      "script_word_count": 14304,
+      "words_per_second_ground_truth": 1.6,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 12.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 2.4,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:12.454393",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "The Shining",
+      "year": 1980,
+      "director": "Stanley Kubrick",
+      "genre": [
+        "Horror",
+        "Thriller"
+      ],
+      "pacing_profile": "slow_dread",
+      "actual_runtime_minutes": 144,
+      "script_word_count": 19008,
+      "words_per_second_ground_truth": 2.2,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 25,
+        "MEDIUM": 25,
+        "CLOSE_UP": 50
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 4.0,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:24.192780",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Pulp Fiction",
+      "year": 1994,
+      "director": "Quentin Tarantino",
+      "genre": [
+        "Thriller",
+        "Crime",
+        "Comedy"
+      ],
+      "pacing_profile": "rhythmic_tension",
+      "actual_runtime_minutes": 154,
+      "script_word_count": 12936,
+      "words_per_second_ground_truth": 1.4,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 25,
+        "MEDIUM": 25,
+        "CLOSE_UP": 50
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:53.458033",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Boyhood",
+      "year": 2014,
+      "director": "Richard Linklater",
+      "genre": [
+        "Drama"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 165,
+      "script_word_count": 18810,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 9.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.8,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:37.439641",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "Whiplash",
+      "year": 2014,
+      "director": "Damien Chazelle",
+      "genre": [
+        "Drama",
+        "Music",
+        "Thriller"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 107,
+      "script_word_count": 12198,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 3.5,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 0.7,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:52.693623",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "The Grand Budapest Hotel",
+      "year": 2014,
+      "director": "Wes Anderson",
+      "genre": [
+        "Comedy",
+        "Drama"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 100,
+      "script_word_count": 5400,
+      "words_per_second_ground_truth": 0.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 3.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 0.6,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:04.187390",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "Fantastic Mr. Fox",
+      "year": 2009,
+      "director": "Wes Anderson",
+      "genre": [
+        "Adventure",
+        "Animation",
+        "Comedy",
+        "Family"
+      ],
+      "pacing_profile": "whimsical_fast",
+      "actual_runtime_minutes": 87,
+      "script_word_count": 5742,
+      "words_per_second_ground_truth": 1.1,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 3.2,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 0.64,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:12.870816",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "Spider-Man: Into the Spider-Verse",
+      "year": 2018,
+      "director": "Bob Persichetti",
+      "genre": [
+        "Animation",
+        "Action",
+        "Adventure",
+        "Science Fiction"
+      ],
+      "pacing_profile": "whimsical_fast",
+      "actual_runtime_minutes": 117,
+      "script_word_count": 7722,
+      "words_per_second_ground_truth": 1.1,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 2.1,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 0.42,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:14.064663",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "Spirited Away",
+      "year": 2001,
+      "director": "Hayao Miyazaki",
+      "genre": [
+        "Animation",
+        "Family",
+        "Fantasy"
+      ],
+      "pacing_profile": "whimsical_fast",
+      "actual_runtime_minutes": 125,
+      "script_word_count": 8250,
+      "words_per_second_ground_truth": 1.1,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 6.5,
+      "dominant_shot_distribution": {
+        "WIDE": 20,
+        "MEDIUM": 50,
+        "CLOSE_UP": 30
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 0.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.3,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:14.897648",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "The Incredibles",
+      "year": 2004,
+      "director": "Brad Bird",
+      "genre": [
+        "Action",
+        "Adventure",
+        "Animation",
+        "Family"
+      ],
+      "pacing_profile": "rapid_fire",
+      "actual_runtime_minutes": 115,
+      "script_word_count": 4485,
+      "words_per_second_ground_truth": 0.65,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 3.8,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 0.76,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:15.654260",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "Toy Story",
+      "year": 1995,
+      "director": "John Lasseter",
+      "genre": [
+        "Family",
+        "Comedy",
+        "Animation",
+        "Adventure"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 81,
+      "script_word_count": 4374,
+      "words_per_second_ground_truth": 0.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:16.402867",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Shrek",
+      "year": 2001,
+      "director": "Andrew Adamson",
+      "genre": [
+        "Animation",
+        "Comedy",
+        "Fantasy",
+        "Adventure",
+        "Family"
+      ],
+      "pacing_profile": "whimsical_fast",
+      "actual_runtime_minutes": 90,
+      "script_word_count": 5940,
+      "words_per_second_ground_truth": 1.1,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:17.558789",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Inside Out",
+      "year": 2015,
+      "director": "Pete Docter",
+      "genre": [
+        "Animation",
+        "Family",
+        "Adventure",
+        "Drama",
+        "Comedy"
+      ],
+      "pacing_profile": "whimsical_fast",
+      "actual_runtime_minutes": 95,
+      "script_word_count": 6270,
+      "words_per_second_ground_truth": 1.1,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:18.757996",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "WALL\u00b7E",
+      "year": 2008,
+      "director": "Andrew Stanton",
+      "genre": [
+        "Animation",
+        "Family",
+        "Science Fiction"
+      ],
+      "pacing_profile": "whimsical_fast",
+      "actual_runtime_minutes": 98,
+      "script_word_count": 6468,
+      "words_per_second_ground_truth": 1.1,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 20,
+        "MEDIUM": 50,
+        "CLOSE_UP": 30
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:19.977668",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Up",
+      "year": 2009,
+      "director": "Pete Docter",
+      "genre": [
+        "Animation",
+        "Comedy",
+        "Family",
+        "Adventure"
+      ],
+      "pacing_profile": "whimsical_fast",
+      "actual_runtime_minutes": 96,
+      "script_word_count": 6336,
+      "words_per_second_ground_truth": 1.1,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:20.902698",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Coco",
+      "year": 2017,
+      "director": "Lee Unkrich",
+      "genre": [
+        "Family",
+        "Animation",
+        "Music",
+        "Adventure"
+      ],
+      "pacing_profile": "whimsical_fast",
+      "actual_runtime_minutes": 105,
+      "script_word_count": 6930,
+      "words_per_second_ground_truth": 1.1,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 0.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:21.785639",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "John Wick",
+      "year": 2014,
+      "director": "Chad Stahelski",
+      "genre": [
+        "Action",
+        "Thriller"
+      ],
+      "pacing_profile": "rapid_fire",
+      "actual_runtime_minutes": 101,
+      "script_word_count": 3939,
+      "words_per_second_ground_truth": 0.65,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 2.5,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 0.5,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:24.173886",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "The Dark Knight",
+      "year": 2008,
+      "director": "Christopher Nolan",
+      "genre": [
+        "Action",
+        "Crime",
+        "Thriller"
+      ],
+      "pacing_profile": "rapid_fire",
+      "actual_runtime_minutes": 152,
+      "script_word_count": 5928,
+      "words_per_second_ground_truth": 0.65,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 3.1,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 0.62,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:25.210970",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "Mission: Impossible - Fallout",
+      "year": 2018,
+      "director": "Christopher McQuarrie",
+      "genre": [
+        "Action",
+        "Adventure"
+      ],
+      "pacing_profile": "rapid_fire",
+      "actual_runtime_minutes": 147,
+      "script_word_count": 5733,
+      "words_per_second_ground_truth": 0.65,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 2.8,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 0.56,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:26.666211",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "Die Hard",
+      "year": 1988,
+      "director": "John McTiernan",
+      "genre": [
+        "Action",
+        "Thriller"
+      ],
+      "pacing_profile": "rapid_fire",
+      "actual_runtime_minutes": 132,
+      "script_word_count": 5148,
+      "words_per_second_ground_truth": 0.65,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:27.523487",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "The Matrix",
+      "year": 1999,
+      "director": "Lana Wachowski",
+      "genre": [
+        "Action",
+        "Science Fiction"
+      ],
+      "pacing_profile": "rapid_fire",
+      "actual_runtime_minutes": 136,
+      "script_word_count": 5304,
+      "words_per_second_ground_truth": 0.65,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:28.306676",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Gladiator",
+      "year": 2000,
+      "director": "Ridley Scott",
+      "genre": [
+        "Action",
+        "Drama",
+        "Adventure"
+      ],
+      "pacing_profile": "rapid_fire",
+      "actual_runtime_minutes": 155,
+      "script_word_count": 6045,
+      "words_per_second_ground_truth": 0.65,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:29.399156",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Inception",
+      "year": 2010,
+      "director": "Christopher Nolan",
+      "genre": [
+        "Action",
+        "Science Fiction",
+        "Adventure"
+      ],
+      "pacing_profile": "rapid_fire",
+      "actual_runtime_minutes": 148,
+      "script_word_count": 5772,
+      "words_per_second_ground_truth": 0.65,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:30.634375",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "The Lord of the Rings: The Fellowship of the Ring",
+      "year": 2001,
+      "director": "Peter Jackson",
+      "genre": [
+        "Adventure",
+        "Fantasy",
+        "Action"
+      ],
+      "pacing_profile": "escalating",
+      "actual_runtime_minutes": 179,
+      "script_word_count": 13962,
+      "words_per_second_ground_truth": 1.3,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:31.465861",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Jurassic Park",
+      "year": 1993,
+      "director": "Steven Spielberg",
+      "genre": [
+        "Adventure",
+        "Science Fiction"
+      ],
+      "pacing_profile": "meditative",
+      "actual_runtime_minutes": 127,
+      "script_word_count": 12192,
+      "words_per_second_ground_truth": 1.6,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:32.245636",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "The Terminator",
+      "year": 1984,
+      "director": "James Cameron",
+      "genre": [
+        "Action",
+        "Thriller",
+        "Science Fiction"
+      ],
+      "pacing_profile": "rapid_fire",
+      "actual_runtime_minutes": 108,
+      "script_word_count": 4212,
+      "words_per_second_ground_truth": 0.65,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:33.035653",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Terminator 2: Judgment Day",
+      "year": 1991,
+      "director": "James Cameron",
+      "genre": [
+        "Action",
+        "Thriller",
+        "Science Fiction"
+      ],
+      "pacing_profile": "rapid_fire",
+      "actual_runtime_minutes": 137,
+      "script_word_count": 5343,
+      "words_per_second_ground_truth": 0.65,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:33.879838",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Raiders of the Lost Ark",
+      "year": 1981,
+      "director": "Steven Spielberg",
+      "genre": [
+        "Adventure",
+        "Action"
+      ],
+      "pacing_profile": "rapid_fire",
+      "actual_runtime_minutes": 115,
+      "script_word_count": 4485,
+      "words_per_second_ground_truth": 0.65,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:35.041567",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "The Bourne Ultimatum",
+      "year": 2007,
+      "director": "Paul Greengrass",
+      "genre": [
+        "Action",
+        "Drama",
+        "Mystery",
+        "Thriller"
+      ],
+      "pacing_profile": "rapid_fire",
+      "actual_runtime_minutes": 115,
+      "script_word_count": 4485,
+      "words_per_second_ground_truth": 0.65,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:35.847035",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Roma",
+      "year": 2018,
+      "director": "Alfonso Cuar\u00f3n",
+      "genre": [
+        "Drama"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 135,
+      "script_word_count": 15390,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 12.5,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 2.5,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:38.936000",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "The Shawshank Redemption",
+      "year": 1994,
+      "director": "Frank Darabont",
+      "genre": [
+        "Drama",
+        "Crime"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 142,
+      "script_word_count": 16188,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:40.420419",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Schindler's List",
+      "year": 1993,
+      "director": "Steven Spielberg",
+      "genre": [
+        "Drama",
+        "History",
+        "War"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 195,
+      "script_word_count": 22230,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:41.175229",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Forrest Gump",
+      "year": 1994,
+      "director": "Robert Zemeckis",
+      "genre": [
+        "Comedy",
+        "Drama",
+        "Romance"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 142,
+      "script_word_count": 7668,
+      "words_per_second_ground_truth": 0.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:42.041283",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Fight Club",
+      "year": 1999,
+      "director": "David Fincher",
+      "genre": [
+        "Drama",
+        "Thriller"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 139,
+      "script_word_count": 15846,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:42.802334",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Good Will Hunting",
+      "year": 1997,
+      "director": "Gus Van Sant",
+      "genre": [
+        "Drama"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 127,
+      "script_word_count": 14478,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:43.617140",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "The Social Network",
+      "year": 2010,
+      "director": "David Fincher",
+      "genre": [
+        "Drama"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 121,
+      "script_word_count": 13794,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:44.851844",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "The Truman Show",
+      "year": 1998,
+      "director": "Peter Weir",
+      "genre": [
+        "Comedy",
+        "Drama"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 103,
+      "script_word_count": 5562,
+      "words_per_second_ground_truth": 0.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:45.727936",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "12 Angry Men",
+      "year": 1957,
+      "director": "Sidney Lumet",
+      "genre": [
+        "Drama"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 97,
+      "script_word_count": 11058,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:46.475640",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "A Beautiful Mind",
+      "year": 2001,
+      "director": "Ron Howard",
+      "genre": [
+        "Drama",
+        "Romance"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 135,
+      "script_word_count": 15390,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:47.254627",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Manchester by the Sea",
+      "year": 2016,
+      "director": "Kenneth Lonergan",
+      "genre": [
+        "Drama"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 138,
+      "script_word_count": 15732,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:48.022135",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Moonlight",
+      "year": 2016,
+      "director": "Barry Jenkins",
+      "genre": [
+        "Drama"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 111,
+      "script_word_count": 12654,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:49.092516",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "There Will Be Blood",
+      "year": 2007,
+      "director": "Paul Thomas Anderson",
+      "genre": [
+        "Drama"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 158,
+      "script_word_count": 18012,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:49.843623",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "No Country for Old Men",
+      "year": 2007,
+      "director": "Joel Coen",
+      "genre": [
+        "Crime",
+        "Thriller",
+        "Western"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 122,
+      "script_word_count": 10980,
+      "words_per_second_ground_truth": 1.5,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 7.2,
+      "dominant_shot_distribution": {
+        "WIDE": 25,
+        "MEDIUM": 25,
+        "CLOSE_UP": 50
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 4.0,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.44,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:51.154504",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "Se7en",
+      "year": 1995,
+      "director": "David Fincher",
+      "genre": [
+        "Crime",
+        "Mystery",
+        "Thriller"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 127,
+      "script_word_count": 11430,
+      "words_per_second_ground_truth": 1.5,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 25,
+        "MEDIUM": 25,
+        "CLOSE_UP": 50
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 4.0,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:54.289693",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "The Silence of the Lambs",
+      "year": 1991,
+      "director": "Jonathan Demme",
+      "genre": [
+        "Crime",
+        "Thriller",
+        "Drama"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 119,
+      "script_word_count": 10710,
+      "words_per_second_ground_truth": 1.5,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:55.304650",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "GoodFellas",
+      "year": 1990,
+      "director": "Martin Scorsese",
+      "genre": [
+        "Drama",
+        "Crime"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 145,
+      "script_word_count": 16530,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:56.095081",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "The Usual Suspects",
+      "year": 1995,
+      "director": "Bryan Singer",
+      "genre": [
+        "Drama",
+        "Crime",
+        "Thriller"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 106,
+      "script_word_count": 12084,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:57.225695",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Heat",
+      "year": 1995,
+      "director": "Michael Mann",
+      "genre": [
+        "Crime",
+        "Drama",
+        "Action"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 170,
+      "script_word_count": 15300,
+      "words_per_second_ground_truth": 1.5,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:57.977845",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Zodiac",
+      "year": 2007,
+      "director": "David Fincher",
+      "genre": [
+        "Crime",
+        "Mystery",
+        "Thriller"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 157,
+      "script_word_count": 14130,
+      "words_per_second_ground_truth": 1.5,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 25,
+        "MEDIUM": 25,
+        "CLOSE_UP": 50
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 4.0,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:58.740146",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Prisoners",
+      "year": 2013,
+      "director": "Denis Villeneuve",
+      "genre": [
+        "Drama",
+        "Thriller",
+        "Crime"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 153,
+      "script_word_count": 17442,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:29:59.508487",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Nightcrawler",
+      "year": 2014,
+      "director": "Dan Gilroy",
+      "genre": [
+        "Crime",
+        "Drama",
+        "Thriller"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 118,
+      "script_word_count": 10620,
+      "words_per_second_ground_truth": 1.5,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:00.337750",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Memento",
+      "year": 2000,
+      "director": "Christopher Nolan",
+      "genre": [
+        "Mystery",
+        "Thriller"
+      ],
+      "pacing_profile": "escalating",
+      "actual_runtime_minutes": 113,
+      "script_word_count": 12204,
+      "words_per_second_ground_truth": 1.8,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 25,
+        "MEDIUM": 25,
+        "CLOSE_UP": 50
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 4.0,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:01.112809",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "The Departed",
+      "year": 2006,
+      "director": "Martin Scorsese",
+      "genre": [
+        "Drama",
+        "Thriller",
+        "Crime"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 151,
+      "script_word_count": 17214,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:01.920379",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Fargo",
+      "year": 1996,
+      "director": "Joel Coen",
+      "genre": [
+        "Crime",
+        "Drama",
+        "Thriller"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 98,
+      "script_word_count": 8820,
+      "words_per_second_ground_truth": 1.5,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:02.678711",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Taxi Driver",
+      "year": 1976,
+      "director": "Martin Scorsese",
+      "genre": [
+        "Crime",
+        "Drama"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 114,
+      "script_word_count": 10260,
+      "words_per_second_ground_truth": 1.5,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:03.419204",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Knives Out",
+      "year": 2019,
+      "director": "Rian Johnson",
+      "genre": [
+        "Comedy",
+        "Crime",
+        "Mystery"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 131,
+      "script_word_count": 7074,
+      "words_per_second_ground_truth": 0.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.5,
+      "dominant_shot_distribution": {
+        "WIDE": 20,
+        "MEDIUM": 50,
+        "CLOSE_UP": 30
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.1,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:04.946883",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "The Big Lebowski",
+      "year": 1998,
+      "director": "Joel Coen",
+      "genre": [
+        "Comedy",
+        "Crime"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 117,
+      "script_word_count": 6318,
+      "words_per_second_ground_truth": 0.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 20,
+        "MEDIUM": 50,
+        "CLOSE_UP": 30
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:05.687397",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Groundhog Day",
+      "year": 1993,
+      "director": "Harold Ramis",
+      "genre": [
+        "Romance",
+        "Fantasy",
+        "Comedy"
+      ],
+      "pacing_profile": "conversational",
+      "actual_runtime_minutes": 101,
+      "script_word_count": 15150,
+      "words_per_second_ground_truth": 2.5,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:06.453018",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Superbad",
+      "year": 2007,
+      "director": "Greg Mottola",
+      "genre": [
+        "Comedy"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 113,
+      "script_word_count": 6102,
+      "words_per_second_ground_truth": 0.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 20,
+        "MEDIUM": 50,
+        "CLOSE_UP": 30
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:07.207133",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "The Hangover",
+      "year": 2009,
+      "director": "Todd Phillips",
+      "genre": [
+        "Comedy"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 100,
+      "script_word_count": 5400,
+      "words_per_second_ground_truth": 0.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 20,
+        "MEDIUM": 50,
+        "CLOSE_UP": 30
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:07.964893",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Shaun of the Dead",
+      "year": 2004,
+      "director": "Edgar Wright",
+      "genre": [
+        "Horror",
+        "Comedy"
+      ],
+      "pacing_profile": "slow_dread",
+      "actual_runtime_minutes": 99,
+      "script_word_count": 13068,
+      "words_per_second_ground_truth": 2.2,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 25,
+        "MEDIUM": 25,
+        "CLOSE_UP": 50
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:08.753906",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Step Brothers",
+      "year": 2008,
+      "director": "Adam McKay",
+      "genre": [
+        "Comedy"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 98,
+      "script_word_count": 5292,
+      "words_per_second_ground_truth": 0.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 20,
+        "MEDIUM": 50,
+        "CLOSE_UP": 30
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:09.497177",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Dumb and Dumber",
+      "year": 1994,
+      "director": "Peter Farrelly",
+      "genre": [
+        "Comedy"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 107,
+      "script_word_count": 5778,
+      "words_per_second_ground_truth": 0.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 20,
+        "MEDIUM": 50,
+        "CLOSE_UP": 30
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:10.337247",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Ferris Bueller's Day Off",
+      "year": 1986,
+      "director": "John Hughes",
+      "genre": [
+        "Comedy"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 103,
+      "script_word_count": 5562,
+      "words_per_second_ground_truth": 0.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 20,
+        "MEDIUM": 50,
+        "CLOSE_UP": 30
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:11.155075",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Arrival",
+      "year": 2016,
+      "director": "Denis Villeneuve",
+      "genre": [
+        "Drama",
+        "Science Fiction",
+        "Mystery"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 116,
+      "script_word_count": 13224,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 8.5,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.7,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:13.803085",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "Blade Runner",
+      "year": 1982,
+      "director": "Ridley Scott",
+      "genre": [
+        "Science Fiction",
+        "Drama",
+        "Thriller"
+      ],
+      "pacing_profile": "meditative",
+      "actual_runtime_minutes": 118,
+      "script_word_count": 11328,
+      "words_per_second_ground_truth": 1.6,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:15.300613",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Blade Runner 2049",
+      "year": 2017,
+      "director": "Denis Villeneuve",
+      "genre": [
+        "Science Fiction",
+        "Drama"
+      ],
+      "pacing_profile": "meditative",
+      "actual_runtime_minutes": 164,
+      "script_word_count": 15744,
+      "words_per_second_ground_truth": 1.6,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:16.116990",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Interstellar",
+      "year": 2014,
+      "director": "Christopher Nolan",
+      "genre": [
+        "Adventure",
+        "Drama",
+        "Science Fiction"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 169,
+      "script_word_count": 19266,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:16.919246",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "The Martian",
+      "year": 2015,
+      "director": "Ridley Scott",
+      "genre": [
+        "Science Fiction",
+        "Drama",
+        "Adventure"
+      ],
+      "pacing_profile": "meditative",
+      "actual_runtime_minutes": 141,
+      "script_word_count": 13536,
+      "words_per_second_ground_truth": 1.6,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:17.693323",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Alien",
+      "year": 1979,
+      "director": "Ridley Scott",
+      "genre": [
+        "Horror",
+        "Science Fiction"
+      ],
+      "pacing_profile": "slow_dread",
+      "actual_runtime_minutes": 117,
+      "script_word_count": 15444,
+      "words_per_second_ground_truth": 2.2,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 25,
+        "MEDIUM": 25,
+        "CLOSE_UP": 50
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:18.450133",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Aliens",
+      "year": 1986,
+      "director": "James Cameron",
+      "genre": [
+        "Action",
+        "Thriller",
+        "Science Fiction"
+      ],
+      "pacing_profile": "rapid_fire",
+      "actual_runtime_minutes": 137,
+      "script_word_count": 5343,
+      "words_per_second_ground_truth": 0.65,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:19.233534",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Back to the Future",
+      "year": 1985,
+      "director": "Robert Zemeckis",
+      "genre": [
+        "Adventure",
+        "Comedy",
+        "Science Fiction"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 116,
+      "script_word_count": 6264,
+      "words_per_second_ground_truth": 0.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:20.253728",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Children of Men",
+      "year": 2006,
+      "director": "Alfonso Cuar\u00f3n",
+      "genre": [
+        "Science Fiction",
+        "Thriller",
+        "Action"
+      ],
+      "pacing_profile": "meditative",
+      "actual_runtime_minutes": 109,
+      "script_word_count": 10464,
+      "words_per_second_ground_truth": 1.6,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:21.105407",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Ex Machina",
+      "year": 2015,
+      "director": "Alex Garland",
+      "genre": [
+        "Drama",
+        "Science Fiction"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 108,
+      "script_word_count": 12312,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:21.860983",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Dune",
+      "year": 2021,
+      "director": "Denis Villeneuve",
+      "genre": [
+        "Science Fiction",
+        "Adventure"
+      ],
+      "pacing_profile": "meditative",
+      "actual_runtime_minutes": 155,
+      "script_word_count": 14880,
+      "words_per_second_ground_truth": 1.6,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:22.636312",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Hereditary",
+      "year": 2018,
+      "director": "Ari Aster",
+      "genre": [
+        "Horror",
+        "Mystery",
+        "Thriller"
+      ],
+      "pacing_profile": "slow_dread",
+      "actual_runtime_minutes": 128,
+      "script_word_count": 16896,
+      "words_per_second_ground_truth": 2.2,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 10.1,
+      "dominant_shot_distribution": {
+        "WIDE": 25,
+        "MEDIUM": 25,
+        "CLOSE_UP": 50
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 4.0,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 2.02,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:23.391975",
+      "notes": "Auto-collected via TMDb. ASL from cinemetrics."
+    },
+    {
+      "title": "Psycho",
+      "year": 1960,
+      "director": "Alfred Hitchcock",
+      "genre": [
+        "Horror",
+        "Thriller",
+        "Mystery"
+      ],
+      "pacing_profile": "slow_dread",
+      "actual_runtime_minutes": 109,
+      "script_word_count": 14388,
+      "words_per_second_ground_truth": 2.2,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 25,
+        "MEDIUM": 25,
+        "CLOSE_UP": 50
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 4.0,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:24.939192",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "The Exorcist",
+      "year": 1973,
+      "director": "William Friedkin",
+      "genre": [
+        "Horror",
+        "Drama"
+      ],
+      "pacing_profile": "slow_dread",
+      "actual_runtime_minutes": 122,
+      "script_word_count": 16104,
+      "words_per_second_ground_truth": 2.2,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:25.702783",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Halloween",
+      "year": 1978,
+      "director": "John Carpenter",
+      "genre": [
+        "Horror",
+        "Thriller"
+      ],
+      "pacing_profile": "slow_dread",
+      "actual_runtime_minutes": 91,
+      "script_word_count": 12012,
+      "words_per_second_ground_truth": 2.2,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 25,
+        "MEDIUM": 25,
+        "CLOSE_UP": 50
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 4.0,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:26.460736",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "A Nightmare on Elm Street",
+      "year": 1984,
+      "director": "Wes Craven",
+      "genre": [
+        "Horror"
+      ],
+      "pacing_profile": "slow_dread",
+      "actual_runtime_minutes": 91,
+      "script_word_count": 12012,
+      "words_per_second_ground_truth": 2.2,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 25,
+        "MEDIUM": 25,
+        "CLOSE_UP": 50
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 4.0,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:27.213860",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Get Out",
+      "year": 2017,
+      "director": "Jordan Peele",
+      "genre": [
+        "Mystery",
+        "Thriller",
+        "Horror"
+      ],
+      "pacing_profile": "escalating",
+      "actual_runtime_minutes": 104,
+      "script_word_count": 11232,
+      "words_per_second_ground_truth": 1.8,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 25,
+        "MEDIUM": 25,
+        "CLOSE_UP": 50
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 4.0,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:27.978748",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Midsommar",
+      "year": 2019,
+      "director": "Ari Aster",
+      "genre": [
+        "Horror",
+        "Drama",
+        "Mystery"
+      ],
+      "pacing_profile": "slow_dread",
+      "actual_runtime_minutes": 147,
+      "script_word_count": 19404,
+      "words_per_second_ground_truth": 2.2,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:28.735930",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "The Conjuring",
+      "year": 2013,
+      "director": "James Wan",
+      "genre": [
+        "Horror",
+        "Thriller"
+      ],
+      "pacing_profile": "slow_dread",
+      "actual_runtime_minutes": 112,
+      "script_word_count": 14784,
+      "words_per_second_ground_truth": 2.2,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 25,
+        "MEDIUM": 25,
+        "CLOSE_UP": 50
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 4.0,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:29.485916",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "It Follows",
+      "year": 2015,
+      "director": "David Robert Mitchell",
+      "genre": [
+        "Horror",
+        "Mystery"
+      ],
+      "pacing_profile": "slow_dread",
+      "actual_runtime_minutes": 101,
+      "script_word_count": 13332,
+      "words_per_second_ground_truth": 2.2,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 25,
+        "MEDIUM": 25,
+        "CLOSE_UP": 50
+      },
+      "color_palette_hex": [
+        "#020617",
+        "#0f172a",
+        "#1e1b4b",
+        "#7f1d1d"
+      ],
+      "primary_mood": "Tense & Atmospheric",
+      "pages_shot_per_day": 4.0,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:30.264220",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Titanic",
+      "year": 1997,
+      "director": "James Cameron",
+      "genre": [
+        "Drama",
+        "Romance"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 194,
+      "script_word_count": 22116,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:31.035463",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "La La Land",
+      "year": 2016,
+      "director": "Damien Chazelle",
+      "genre": [
+        "Comedy",
+        "Drama",
+        "Romance"
+      ],
+      "pacing_profile": "dialogue_driven",
+      "actual_runtime_minutes": 129,
+      "script_word_count": 6966,
+      "words_per_second_ground_truth": 0.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:31.967458",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "The Notebook",
+      "year": 2004,
+      "director": "Nick Cassavetes",
+      "genre": [
+        "Romance",
+        "Drama"
+      ],
+      "pacing_profile": "conversational",
+      "actual_runtime_minutes": 123,
+      "script_word_count": 18450,
+      "words_per_second_ground_truth": 2.5,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:32.957834",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Pride & Prejudice",
+      "year": 2005,
+      "director": "Joe Wright",
+      "genre": [
+        "Drama",
+        "Romance"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 128,
+      "script_word_count": 14592,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:34.057951",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Before Sunrise",
+      "year": 1995,
+      "director": "Richard Linklater",
+      "genre": [
+        "Drama",
+        "Romance"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 101,
+      "script_word_count": 11514,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:35.092932",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Eternal Sunshine of the Spotless Mind",
+      "year": 2004,
+      "director": "Michel Gondry",
+      "genre": [
+        "Science Fiction",
+        "Drama",
+        "Romance"
+      ],
+      "pacing_profile": "meditative",
+      "actual_runtime_minutes": 108,
+      "script_word_count": 10368,
+      "words_per_second_ground_truth": 1.6,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#082f49",
+        "#0e7490",
+        "#064e3b",
+        "#b45309"
+      ],
+      "primary_mood": "High Octane / Epic",
+      "pages_shot_per_day": 2.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:35.907930",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Casablanca",
+      "year": 1943,
+      "director": "Michael Curtiz",
+      "genre": [
+        "Drama",
+        "Romance"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 102,
+      "script_word_count": 11628,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:36.662482",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Silver Linings Playbook",
+      "year": 2012,
+      "director": "David O. Russell",
+      "genre": [
+        "Drama",
+        "Comedy",
+        "Romance"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 122,
+      "script_word_count": 13908,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fef08a",
+        "#fde047",
+        "#fcd34d",
+        "#fbbf24"
+      ],
+      "primary_mood": "Vibrant & Light",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:37.850074",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "The Good, the Bad and the Ugly",
+      "year": 1966,
+      "director": "Sergio Leone",
+      "genre": [
+        "Western"
+      ],
+      "pacing_profile": "slow_burn",
+      "actual_runtime_minutes": 161,
+      "script_word_count": 16422,
+      "words_per_second_ground_truth": 1.7,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 20,
+        "MEDIUM": 50,
+        "CLOSE_UP": 30
+      },
+      "color_palette_hex": [
+        "#1e293b",
+        "#334155",
+        "#475569",
+        "#94a3b8"
+      ],
+      "primary_mood": "Neutral",
+      "pages_shot_per_day": 4.0,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:38.599863",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Once Upon a Time in the West",
+      "year": 1968,
+      "director": "Sergio Leone",
+      "genre": [
+        "Drama",
+        "Western"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 166,
+      "script_word_count": 18924,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:39.390984",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Unforgiven",
+      "year": 1992,
+      "director": "Clint Eastwood",
+      "genre": [
+        "Western"
+      ],
+      "pacing_profile": "slow_burn",
+      "actual_runtime_minutes": 130,
+      "script_word_count": 13260,
+      "words_per_second_ground_truth": 1.7,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 20,
+        "MEDIUM": 50,
+        "CLOSE_UP": 30
+      },
+      "color_palette_hex": [
+        "#1e293b",
+        "#334155",
+        "#475569",
+        "#94a3b8"
+      ],
+      "primary_mood": "Neutral",
+      "pages_shot_per_day": 4.0,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:40.728487",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "Django Unchained",
+      "year": 2012,
+      "director": "Quentin Tarantino",
+      "genre": [
+        "Drama",
+        "Western"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 165,
+      "script_word_count": 18810,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:41.785115",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "The Hateful Eight",
+      "year": 2015,
+      "director": "Quentin Tarantino",
+      "genre": [
+        "Drama",
+        "Mystery",
+        "Western"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 188,
+      "script_word_count": 21432,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 15,
+        "MEDIUM": 45,
+        "CLOSE_UP": 40
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:42.545962",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "True Grit",
+      "year": 2010,
+      "director": "Ethan Coen",
+      "genre": [
+        "Drama",
+        "Adventure",
+        "Western"
+      ],
+      "pacing_profile": "naturalistic",
+      "actual_runtime_minutes": 110,
+      "script_word_count": 12540,
+      "words_per_second_ground_truth": 1.9,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:43.579011",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    },
+    {
+      "title": "The Revenant",
+      "year": 2015,
+      "director": "Alejandro G. I\u00f1\u00e1rritu",
+      "genre": [
+        "Western",
+        "Drama",
+        "Adventure"
+      ],
+      "pacing_profile": "slow_burn",
+      "actual_runtime_minutes": 157,
+      "script_word_count": 16014,
+      "words_per_second_ground_truth": 1.7,
+      "avg_scene_duration_seconds": 180.0,
+      "avg_shot_duration_seconds": 5.0,
+      "dominant_shot_distribution": {
+        "WIDE": 40,
+        "MEDIUM": 40,
+        "CLOSE_UP": 20
+      },
+      "color_palette_hex": [
+        "#fdf4ff",
+        "#f5d0fe",
+        "#e879f9",
+        "#fda4af"
+      ],
+      "primary_mood": "Intimate & Emotional",
+      "pages_shot_per_day": 5.5,
+      "avg_dialogue_percentage": 50,
+      "avg_tension_score": 5.0,
+      "genre_pacing_multiplier": 1.0,
+      "words_per_minute_dialogue": 120,
+      "source": "tmdb_auto",
+      "collected_at": "2026-05-03T22:30:44.768630",
+      "notes": "Auto-collected via TMDb. ASL from genre estimate."
+    }
+  ],
+  "genre_baseline_multipliers": {
+    "Action": 0.55,
+    "Adventure": 0.7,
+    "Animation": 0.9,
+    "Comedy": 0.85,
+    "Crime": 1.6,
+    "Documentary": 1.5,
+    "Drama": 1.9,
+    "Fantasy": 1.1,
+    "Horror": 2.5,
+    "Music": 1.0,
+    "Mystery": 2.0,
+    "Romance": 2.8,
+    "Sci-Fi": 1.8,
+    "Thriller": 1.5,
+    "Western": 1.9,
+    "default": 1.5
+  }
+}

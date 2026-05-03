@@ -1,0 +1,55 @@
+{
+  "version": "1.0",
+  "description": "Learned genre-specific pacing multipliers. Updated by the /calibrate endpoint based on error rate comparisons.",
+  "last_updated": "2026-05-03T23:39:51.092039",
+  "total_calibrations_run": 1,
+  "genre_multipliers": {
+    "Action": 1.0,
+    "Adventure": 1.0,
+    "Animation": 1.0,
+    "Comedy": 1.0,
+    "Crime": 1.0,
+    "Documentary": 1.0,
+    "Drama": 1.0,
+    "Fantasy": 1.0,
+    "Horror": 1.0,
+    "Music": 1.0,
+    "Mystery": 1.0,
+    "Romance": 1.156,
+    "Sci-Fi": 1.0,
+    "Thriller": 1.0,
+    "Western": 1.0,
+    "default": 1.0
+  },
+  "words_per_second_by_genre": {
+    "Action": 0.65,
+    "Adventure": 0.85,
+    "Animation": 1.2,
+    "Comedy": 1.1,
+    "Crime": 1.5,
+    "Documentary": 1.8,
+    "Drama": 1.95,
+    "Fantasy": 1.3,
+    "Horror": 2.2,
+    "Music": 1.0,
+    "Mystery": 1.8,
+    "Romance": 2.5,
+    "Sci-Fi": 1.6,
+    "Thriller": 1.4,
+    "Western": 1.7,
+    "default": 1.5
+  },
+  "error_history": [
+    {
+      "timestamp": "2026-05-03T23:39:51.092016",
+      "film": "auto-calibration",
+      "genre": "Romance",
+      "predicted_min": 16.0,
+      "expected_min": 41.0,
+      "mape_percent": 60.95,
+      "old_multiplier": 1.0,
+      "new_multiplier": 1.156,
+      "reference_film": "La La Land"
+    }
+  ]
+}
