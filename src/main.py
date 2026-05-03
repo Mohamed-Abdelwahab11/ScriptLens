@@ -49,7 +49,7 @@ app.add_middleware(
 
 client = AsyncGroq(api_key=os.getenv("GROQ_API_KEY"))
 
-async def process_chunk(chunk_text: str, logline: str, previous_memory: str, pacing_bias: float = 1.0):
+async def process_chunk(chunk_text: str, logline: str, previous_memory: str, pacing_bias: float = 1.0, model_name: str = "llama-3.3-70b-versatile"):
     prompt = f"""
     Act as a Master Cinematographer and Cinema Scholar. Analyze this part of the script:
     LOGLINE: "{logline}"
@@ -125,13 +125,13 @@ async def process_chunk(chunk_text: str, logline: str, previous_memory: str, pac
       ]
     }}
     """
-    max_retries = 3
-    base_delay = 5.0
+    max_retries = 6
+    base_delay = 15.0
     
     for attempt in range(max_retries):
         try:
             completion = await client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
+                model=model_name,
                 messages=[{"role": "user", "content": prompt}],
                 response_format={"type": "json_object"},
                 temperature=0.2
@@ -220,7 +220,16 @@ async def analyze_script(data: dict):
     pacing_bias = genre_multipliers.get(genre, genre_multipliers.get("default", 1.5))
     print(f"[ML] Using pacing bias: {pacing_bias:.2f}x for genre: {genre}")
 
-    # 1. Chunking
+    # 1. Smart Model Downgrade for Free Tier Limits
+    # Groq free tier restricts llama-3.3-70b to 6k TPM, but allows 30k TPM for 8b models.
+    if len(script_text) > 30000:
+        model_name = "llama-3.1-8b-instant"
+        print(f"[ML] Large script detected ({len(script_text)} chars). Switching to {model_name} to bypass TPM limits.")
+    else:
+        model_name = "llama-3.3-70b-versatile"
+        print(f"[ML] Short script detected ({len(script_text)} chars). Using high-quality model: {model_name}.")
+
+    # 2. Chunking
     chunk_size = 6000
     overlap_size = 500
     chunks_with_context = []
@@ -235,9 +244,9 @@ async def analyze_script(data: dict):
     
     async def process_chunk_with_semaphore(chunk, log, memory):
         async with sem:
-            # Added a small delay between chunks to allow the rolling minute bucket to refill
-            await asyncio.sleep(2.0)
-            return await process_chunk(chunk, log, memory, pacing_bias)
+            # Added a larger delay between chunks to allow the rolling minute bucket to refill
+            await asyncio.sleep(4.0)
+            return await process_chunk(chunk, log, memory, pacing_bias, model_name)
 
     tasks = [process_chunk_with_semaphore(chunk, logline, ctx) for chunk, ctx in chunks_with_context]
     
