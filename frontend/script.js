@@ -5,6 +5,9 @@
 console.log("ScriptLens JS is LIVE!");
 const API_BASE_URL = 'http://127.0.0.1:8000';
 let shotChart = null, storyArcChart = null;
+window.currentAnalysisData = null;
+window.normalizationRatio = 1.0;
+
 
 // Initialize PDF.js worker
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
@@ -62,81 +65,86 @@ async function runAnalysis() {
     analyticsSection.classList.add('hidden');
     resultsContainer.classList.add('hidden');
     resultsContainer.innerHTML = '';
-
-    // Smart Progress Bar Setup based on backend concurrency
-    const scriptLength = scriptInput.value.length;
-    const numChunks = Math.ceil(scriptLength / 6000); // Matched with backend chunk size
-    const numRounds = Math.ceil(numChunks / 5); // Semaphore(5) on backend
     
-    // Conservative estimate: 7 seconds per round + 2s overhead. Prevents the "stuck at 95%" feeling.
-    const estimatedTimeMs = Math.max((numRounds * 7000) + 2000, 6000); 
-    
-    let progress = 0;
     const loadingProgressBar = document.getElementById('loadingProgressBar');
     const progressPercent = document.getElementById('progressPercent');
     const progressEstimate = document.getElementById('progressEstimate');
     
-    progressEstimate.innerText = `ESTIMATED TIME: ~${Math.ceil(estimatedTimeMs / 1000)} SECONDS`;
     loadingProgressBar.style.width = '0%';
     progressPercent.innerText = '0%';
-    
-    const updateInterval = 250; // ms
-    const baseIncrement = 95 / (estimatedTimeMs / updateInterval);
-    
-    let progressInterval = setInterval(() => {
-        if (progress < 95) {
-            // Decelerate progress as it gets closer to 95% to avoid hanging
-            let currentIncrement = baseIncrement;
-            if (progress > 80) currentIncrement = baseIncrement * 0.4;
-            if (progress > 90) currentIncrement = baseIncrement * 0.1;
+    progressEstimate.innerText = 'CONNECTING TO CINEMATIC ENGINE...';
+
+    // Set up WebSocket
+    const wsUrl = API_BASE_URL.replace('http', 'ws') + '/ws/analyze';
+    const ws = new WebSocket(wsUrl);
+
+    ws.onopen = () => {
+        progressEstimate.innerText = 'ANALYZING SCRIPT TOPOLOGY...';
+        ws.send(JSON.stringify({ 
+            script_text: scriptInput.value, 
+            logline: loglineInput.value
+        }));
+    };
+
+    ws.onmessage = async (event) => {
+        try {
+            const msg = JSON.parse(event.data);
             
-            progress += currentIncrement;
-            const displayProgress = Math.min(95, progress);
-            loadingProgressBar.style.width = `${displayProgress}%`;
-            progressPercent.innerText = `${Math.floor(displayProgress)}%`;
+            if (msg.type === "progress") {
+                const percent = Math.floor((msg.current_chunk / msg.total_chunks) * 100);
+                loadingProgressBar.style.width = `${percent}%`;
+                progressPercent.innerText = `${percent}%`;
+                progressEstimate.innerText = msg.message.toUpperCase();
+            } else if (msg.type === "complete") {
+                loadingProgressBar.style.width = '100%';
+                progressPercent.innerText = '100%';
+                progressEstimate.innerText = 'ANALYSIS COMPLETE. RENDERING...';
+                
+                await new Promise(r => setTimeout(r, 400)); // Small pause for UX
+                
+                const data = msg.data;
+                if (data.analysis && data.analysis.length > 0) {
+                    document.getElementById('totalDurationText').innerText = "Calculating...";
+                    window.currentAnalysisData = data;
+                    renderDashboard(data);
+                    analyticsSection.classList.remove('hidden');
+                    resultsContainer.classList.remove('hidden');
+                    document.getElementById('exportPdfBtn').classList.remove('hidden');
+                } else if (data.error) {
+                    throw new Error(data.error);
+                } else {
+                    alert("Analysis failed. The AI returned empty data, likely due to API rate limits.");
+                }
+                
+                analyzeBtn.disabled = false;
+                loading.classList.add('hidden');
+                ws.close();
+            } else if (msg.type === "error") {
+                throw new Error(msg.message);
+            }
+        } catch (err) {
+            console.error("WS Error:", err);
+            progressEstimate.innerText = 'ERROR: ' + err.message;
+            progressEstimate.classList.add('text-red-500');
+            loadingProgressBar.classList.add('bg-red-500');
+            loadingProgressBar.classList.remove('bg-gradient-to-r', 'from-blue-500', 'to-indigo-500');
+            analyzeBtn.disabled = false;
+            ws.close();
         }
-    }, updateInterval);
+    };
 
-    try {
-        const response = await fetch(`${API_BASE_URL}/analyze`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                script_text: scriptInput.value, 
-                logline: loglineInput.value
-            })
-        });
-
-        const data = await response.json();
-        
-        // Finish progress bar instantly on success
-        clearInterval(progressInterval);
-        loadingProgressBar.style.width = '100%';
-        progressPercent.innerText = '100%';
-        progressEstimate.innerText = 'ANALYSIS COMPLETE. RENDERING...';
-        
-        await new Promise(r => setTimeout(r, 400)); // Small pause for UX so they see 100%
-        
-        if (data.analysis && data.analysis.length > 0) {
-            document.getElementById('totalDurationText').innerText = "Calculating...";
-
-            window.currentAnalysisData = data;
-            renderDashboard(data);
-            analyticsSection.classList.remove('hidden');
-            resultsContainer.classList.remove('hidden');
-            document.getElementById('exportPdfBtn').classList.remove('hidden');
-        } else {
-            alert("Analysis failed. The AI returned empty data, likely due to API rate limits (6000 TPM limit reached) or incomplete output. Try a smaller script snippet.");
-        }
-    } catch (err) {
-        clearInterval(progressInterval);
-        progressEstimate.innerText = 'ERROR: ' + err.message;
+    ws.onerror = (error) => {
+        console.error("WebSocket connection error:", error);
+        progressEstimate.innerText = 'CONNECTION ERROR. PLEASE RESTART THE BACKEND SERVER.';
         progressEstimate.classList.add('text-red-500');
-        alert("Error occurred: " + err.message + "\nStack: " + err.stack);
-    } finally {
+        loadingProgressBar.classList.add('bg-red-500');
+        loadingProgressBar.classList.remove('bg-gradient-to-r', 'from-blue-500', 'to-indigo-500');
         analyzeBtn.disabled = false;
-        loading.classList.add('hidden');
-    }
+    };
+    
+    ws.onclose = () => {
+        analyzeBtn.disabled = false;
+    };
 }
 
 // ============================================================
@@ -499,6 +507,7 @@ function renderDashboard(data) {
     const avgPacing = data.analysis.length > 0 ? totalPacingMultiplier / data.analysis.length : 1.0;
     const targetTotalSeconds = baselineTotalSeconds * avgPacing;
     const normalizationRatio = rawTotalAiSeconds > 0 ? targetTotalSeconds / rawTotalAiSeconds : 1;
+    window.normalizationRatio = normalizationRatio;
     // ---------------------------------------------------------
 
     data.analysis.forEach((scene, sIdx) => {
@@ -558,76 +567,7 @@ function renderDashboard(data) {
 
             sceneShotsTimelineHTML += `<div title="Shot ${totalShots}: ${type} (${duration}s)" class="shot-block bg-${colorClass}-500 h-8 rounded-[4px] shadow-sm flex-shrink-0 hover:scale-[1.3] hover:-translate-y-1 hover:z-10 transition-transform origin-bottom cursor-pointer relative group" style="min-width: ${Math.max(duration * 3, 4)}px"></div>`;
 
-            const primaryPercent = primary.primary_percentage ? `<span class="bg-${colorClass}-500/10 text-${colorClass}-400 px-2 py-0.5 rounded ml-3 border border-${colorClass}-500/30 font-mono tracking-wider" title="Algorithmic Confidence Match for this Genre">${primary.primary_percentage}% ML CONFIDENCE</span>` : '';
-            
-            let alternativesHTML = '';
-            // Render alternatives as interactive cards
-            if (alts.length > 0) {
-                let altList = alts.map((alt, altIdx) => {
-                    const altType = (alt.shot_type || "MEDIUM").toUpperCase();
-                    const altColor = altType.includes("WIDE") ? "emerald" : altType.includes("CLOSE") ? "orange" : "blue";
-                    const altLens = getLens(altType);
-                    
-                    // JSON serialize to escape quotes properly for onclick
-                    return `
-                    <div onclick="swapAlternative(${sIdx}, ${i}, ${altIdx})" class="bg-slate-800/80 p-5 rounded-[1.5rem] border-l-4 border-${altColor}-500 shadow-md flex flex-col justify-between cursor-pointer hover:scale-[1.02] hover:bg-slate-700/80 transition-all group">
-                        <div>
-                            <div class="flex justify-between items-start mb-3">
-                                <div>
-                                    <span class="text-[9px] font-black uppercase tracking-[0.2em] text-${altColor}-400 flex items-center mb-2 group-hover:text-white transition-colors">Alt ${altIdx + 1} • ${altType} <span class="bg-slate-700/50 text-slate-300 px-1.5 py-0.5 rounded ml-2 border border-slate-600 font-mono" title="Machine Learning Probability Score">${alt.percentage || 0}% PROBABILITY</span></span>
-                                    <div class="flex gap-2 flex-wrap">
-                                        <span class="badge-tag badge-angle text-[8px] px-2 py-0.5">🎥 ${alt.angle || 'Standard'}</span>
-                                        <span class="badge-tag badge-movement text-[8px] px-2 py-0.5">🎬 ${alt.movement || 'Static'}</span>
-                                        <span class="badge-tag text-[8px] px-2 py-0.5 bg-slate-800 text-slate-300 border border-slate-600">👁️ ${altLens}</span>
-                                    </div>
-                                </div>
-                                <button class="text-slate-500 group-hover:text-blue-400 hover:scale-110 transition-all bg-slate-800 p-2 rounded-full border border-slate-700/50" title="Swap this direction to Primary">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
-                                </button>
-                            </div>
-                            <p class="text-slate-300 text-xs leading-relaxed mb-3 font-medium italic border-l-2 border-slate-600 pl-3 py-0.5">"${alt.cinematic_reasoning || ''}"</p>
-                        </div>
-                        <div class="pt-3 border-t border-white/5 text-[7px] font-black text-blue-400/80 uppercase tracking-widest mt-auto">
-                            🎥 REF: ${alt.director_reference || 'N/A'}
-                        </div>
-                    </div>
-                    `;
-                }).join('');
-                
-                alternativesHTML = `
-                <div class="mt-6 pt-5 border-t border-slate-700/50">
-                    <div class="text-[10px] font-black uppercase text-slate-500 mb-4 tracking-widest flex items-center gap-2">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        Alternative Directions (Click to Swap)
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        ${altList}
-                    </div>
-                </div>
-                `;
-            }
-            shotsHTML += `
-                <div class="bg-slate-900/60 p-6 rounded-[2.5rem] border-l-8 border-${colorClass}-500 mb-6 shadow-2xl relative">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <div class="text-[11px] font-black uppercase tracking-[0.2em] text-${colorClass}-400 flex items-center">Shot ${totalShots} • ${type} ${primaryPercent}</div>
-                            <div class="flex gap-2 mt-3">
-                                <span class="badge-tag badge-angle">🎥 ANGLE: ${primary.angle || 'Eye Level'}</span>
-                                <span class="badge-tag badge-movement">🎬 MOVE: ${primary.movement || 'Static'}</span>
-                                <span class="badge-tag text-[8px] px-2 py-0.5 bg-slate-800 text-slate-300 border border-slate-600">👁️ LENS: ${lens}</span>
-                            </div>
-                        </div>
-                        <div class="flex gap-3 items-center">
-                            <button onclick="lockShot(this)" class="text-slate-500 hover:text-amber-400 transition-colors" title="Director's Lock">🔒</button>
-                            <span class="text-xs font-mono text-slate-400 font-black bg-slate-800 px-3 py-1 rounded-lg">${duration}S</span>
-                        </div>
-                    </div>
-                    <p class="text-slate-200 text-sm leading-relaxed mb-4 font-medium italic border-l-2 border-slate-700 pl-4 py-1">"${primary.cinematic_reasoning || ''}"</p>
-                    <div class="pt-4 border-t border-white/5 text-[9px] font-black text-blue-400 uppercase tracking-widest">
-                        🎥 REF: ${primary.director_reference || ''} • ${primary.movie_reference || ''}
-                    </div>
-                    ${alternativesHTML}
-                </div>`;
+            shotsHTML += generateShotCardHTML(sIdx, i, totalShots);
         });
 
         if (!sceneShotsTimelineHTML) {
@@ -657,11 +597,19 @@ function renderDashboard(data) {
                             <div class="inline-block px-4 py-1 bg-blue-500/10 rounded-full border border-blue-500/20 text-[10px] font-black text-blue-400 uppercase tracking-widest">Scene ${sIdx + 1}</div>
                             ${pacingBadge}
                         </div>
+                        <div class="mt-2 flex items-center gap-3 bg-black/20 p-2 rounded-lg border border-white/5 inline-flex">
+                            <span class="text-[9px] font-black text-slate-500 uppercase tracking-widest">Director Pacing Override:</span>
+                            <input type="range" min="0.3" max="4.0" step="0.1" value="${pm}" 
+                                   oninput="document.getElementById('pacingVal-${sIdx}').innerText = this.value + 'x'"
+                                   onchange="updateScenePacing(${sIdx}, this.value)" 
+                                   class="w-24 h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+                            <span id="pacingVal-${sIdx}" class="text-[10px] font-mono text-blue-400 font-bold w-6">${pm}x</span>
+                        </div>
                         <h3 class="text-3xl font-black text-white leading-none tracking-tighter">${scene.scene_header}</h3>
                         <p class="text-xs text-blue-400 font-bold uppercase tracking-widest">${(scene.characters || []).join(' • ')}</p>
-                        <div class="pt-4 border-t border-slate-700/50">
-                            <p class="text-[10px] text-slate-400 uppercase tracking-widest font-black mb-1">Estimated Duration</p>
-                            <p class="text-xl font-mono text-white font-black">${Math.floor((scene.scene_duration_seconds || 0)/60)}m ${(scene.scene_duration_seconds || 0)%60}s</p>
+                        <div class=\"pt-4 border-t border-slate-700/50\">
+                            <p class=\"text-[10px] text-slate-400 uppercase tracking-widest font-black mb-1\">Estimated Duration</p>
+                            <p id=\"sceneDurLabel-${sIdx}\" class=\"text-xl font-mono text-white font-black\">${Math.floor((scene.scene_duration_seconds || 0)/60)}m ${(scene.scene_duration_seconds || 0)%60}s</p>
                         </div>
                     </div>
                     <div class="lg:col-span-3 relative">
@@ -731,6 +679,18 @@ function renderDashboard(data) {
 
     const rangeText = data.estimated_runtime_range ? `EST: ${data.estimated_runtime_range}` : 'Calculating...';
     document.getElementById('totalDurationText').innerHTML = `${rangeText} <span class="text-lg text-slate-500 ml-2">(${formatTime(totalFilmSeconds)})</span>`;
+    
+    // Runtime Breakdown
+    const breakdownEl = document.getElementById('runtimeBreakdown');
+    if (data.runtime_breakdown && breakdownEl) {
+        breakdownEl.classList.remove('hidden');
+        document.getElementById('bdDialogue').innerText = data.runtime_breakdown.dialogue_minutes + 'm';
+        document.getElementById('bdAction').innerText = data.runtime_breakdown.action_minutes + 'm';
+        document.getElementById('bdOverhead').innerText = data.runtime_breakdown.overhead_minutes + 'm';
+    } else if (breakdownEl) {
+        breakdownEl.classList.add('hidden');
+    }
+
 
     updateCharts(chartCounts, tensionData);
     renderCharacterNetwork(characterOccurrences, characterEdges);
@@ -1002,16 +962,19 @@ function swapAlternative(sceneIdx, shotIdx, altIdx) {
     const scene = window.currentAnalysisData.analysis[sceneIdx];
     const shot = scene.shots[shotIdx];
     
+    if (shot.isLocked) {
+        alert("This shot is locked by the director. Unlock it to swap alternatives.");
+        return;
+    }
+    
     if(!shot.alternatives || shot.alternatives.length <= altIdx) return;
     
-    // Deep clone to swap
     const currentPrimary = JSON.parse(JSON.stringify(shot));
-    delete currentPrimary.alternatives; // Remove alternatives from the clone to avoid nesting
-    currentPrimary.percentage = currentPrimary.primary_percentage || 50; // Ensure it has a percentage for the alt array
+    delete currentPrimary.alternatives;
+    currentPrimary.percentage = currentPrimary.primary_percentage || 50;
     
     const selectedAlt = shot.alternatives[altIdx];
     
-    // Move alt properties to primary
     shot.shot_type = selectedAlt.shot_type;
     shot.angle = selectedAlt.angle;
     shot.movement = selectedAlt.movement;
@@ -1020,8 +983,146 @@ function swapAlternative(sceneIdx, shotIdx, altIdx) {
     shot.director_reference = selectedAlt.director_reference || shot.director_reference;
     shot.movie_reference = selectedAlt.movie_reference || shot.movie_reference;
     
-    // Move old primary into the alternatives array
     shot.alternatives[altIdx] = currentPrimary;
+    
+    // Partial Re-render instead of full dashboard
+    const cardDiv = document.getElementById(`shotCard-${sceneIdx}-${shotIdx}`);
+    if (cardDiv) {
+        const globalShotIndex = cardDiv.getAttribute('data-globalidx') || "X";
+        cardDiv.outerHTML = generateShotCardHTML(sceneIdx, shotIdx, globalShotIndex);
+    }
+}
+
+function lockShot(btnElement, sceneIdx, shotIdx) {
+    const shot = window.currentAnalysisData.analysis[sceneIdx].shots[shotIdx];
+    shot.isLocked = !shot.isLocked;
+    
+    if(shot.isLocked) {
+        btnElement.classList.remove('text-slate-500');
+        btnElement.classList.add('text-amber-400');
+        btnElement.innerText = '🔐';
+    } else {
+        btnElement.classList.remove('text-amber-400');
+        btnElement.classList.add('text-slate-500');
+        btnElement.innerText = '🔒';
+    }
+}
+
+
+
+function generateShotCardHTML(sceneIdx, shotIdx, globalShotIndex) {
+    const scene = window.currentAnalysisData.analysis[sceneIdx];
+    const shotObj = scene.shots[shotIdx];
+    const rawDuration = shotObj.estimated_seconds || 5;
+    const duration = Math.max(1, Math.round(rawDuration * window.normalizationRatio));
+    
+    const primary = shotObj;
+    const alts = Array.isArray(shotObj.alternatives) ? shotObj.alternatives : [];
+    const type = (primary.shot_type || "MEDIUM").toUpperCase();
+    
+    const colorClass = type.includes("WIDE") ? "emerald" : type.includes("CLOSE") ? "orange" : "blue";
+    
+    const getLens = (shotType) => {
+        if(shotType.includes("WIDE")) return "14mm-24mm";
+        if(shotType.includes("CLOSE")) return "85mm-100mm";
+        return "35mm-50mm";
+    };
+    const lens = getLens(type);
+    
+    const primaryPercent = primary.primary_percentage ? `<span class="bg-${colorClass}-500/10 text-${colorClass}-400 px-2 py-0.5 rounded ml-3 border border-${colorClass}-500/30 font-mono tracking-wider" title="Algorithmic Confidence Match for this Genre">${primary.primary_percentage}% ML CONFIDENCE</span>` : '';
+    
+    let alternativesHTML = '';
+    if (alts.length > 0) {
+        let altList = alts.map((alt, altIdx) => {
+            const altType = (alt.shot_type || "MEDIUM").toUpperCase();
+            const altColor = altType.includes("WIDE") ? "emerald" : altType.includes("CLOSE") ? "orange" : "blue";
+            const altLens = getLens(altType);
+            
+            return `
+            <div onclick="swapAlternative(${sceneIdx}, ${shotIdx}, ${altIdx})" class="bg-slate-800/80 p-5 rounded-[1.5rem] border-l-4 border-${altColor}-500 shadow-md flex flex-col justify-between cursor-pointer hover:scale-[1.02] hover:bg-slate-700/80 transition-all group">
+                <div>
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <span class="text-[9px] font-black uppercase tracking-[0.2em] text-${altColor}-400 flex items-center mb-2 group-hover:text-white transition-colors">Alt ${altIdx + 1} • ${altType} <span class="bg-slate-700/50 text-slate-300 px-1.5 py-0.5 rounded ml-2 border border-slate-600 font-mono" title="Machine Learning Probability Score">${alt.percentage || 0}% PROBABILITY</span></span>
+                            <div class="flex gap-2 flex-wrap">
+                                <span class="badge-tag badge-angle text-[8px] px-2 py-0.5">🎥 ${alt.angle || 'Standard'}</span>
+                                <span class="badge-tag badge-movement text-[8px] px-2 py-0.5">🎬 ${alt.movement || 'Static'}</span>
+                                <span class="badge-tag text-[8px] px-2 py-0.5 bg-slate-800 text-slate-300 border border-slate-600">👁️ ${altLens}</span>
+                            </div>
+                        </div>
+                        <button class="text-slate-500 group-hover:text-blue-400 hover:scale-110 transition-all bg-slate-800 p-2 rounded-full border border-slate-700/50" title="Swap this direction to Primary">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                        </button>
+                    </div>
+                    <p class="text-slate-300 text-xs leading-relaxed mb-3 font-medium italic border-l-2 border-slate-600 pl-3 py-0.5">"${alt.cinematic_reasoning || ''}"</p>
+                </div>
+                <div class="pt-3 border-t border-white/5 text-[7px] font-black text-blue-400/80 uppercase tracking-widest mt-auto">
+                    🎥 REF: ${alt.director_reference || 'N/A'}
+                </div>
+            </div>
+            `;
+        }).join('');
+        
+        alternativesHTML = `
+        <div class="mt-6 pt-5 border-t border-slate-700/50">
+            <div class="text-[10px] font-black uppercase text-slate-500 mb-4 tracking-widest flex items-center gap-2">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                Alternative Directions (Click to Swap)
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                ${altList}
+            </div>
+        </div>
+        `;
+    }
+    
+    const lockBtnClass = shotObj.isLocked ? "text-amber-400" : "text-slate-500";
+    const lockBtnIcon = shotObj.isLocked ? "🔐" : "🔒";
+
+    return `
+        <div class="bg-slate-900/60 p-6 rounded-[2.5rem] border-l-8 border-${colorClass}-500 mb-6 shadow-2xl relative shot-card" id="shotCard-${sceneIdx}-${shotIdx}" data-globalidx="${globalShotIndex}">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <div class="text-[11px] font-black uppercase tracking-[0.2em] text-${colorClass}-400 flex items-center">Shot ${globalShotIndex} • ${type} ${primaryPercent}</div>
+                    <div class="flex gap-2 mt-3">
+                        <span class="badge-tag badge-angle">🎥 ANGLE: ${primary.angle || 'Eye Level'}</span>
+                        <span class="badge-tag badge-movement">🎬 MOVE: ${primary.movement || 'Static'}</span>
+                        <span class="badge-tag text-[8px] px-2 py-0.5 bg-slate-800 text-slate-300 border border-slate-600">👁️ LENS: ${lens}</span>
+                    </div>
+                </div>
+                <div class=\"flex gap-3 items-center\">
+                    <div class=\"flex items-center gap-2 bg-black/40 px-3 py-1 rounded-full border border-white/5 mr-2\">
+                         <span class=\"text-[8px] font-black text-slate-500 uppercase tracking-widest\">Pace:</span>
+                         <input type=\"range\" min=\"0.3\" max=\"4.0\" step=\"0.1\" value=\"${shotObj.pacing_multiplier || 1.0}\" 
+                                oninput=\"this.nextElementSibling.innerText = this.value + 'x'\"
+                                onchange=\"updateShotPacing(${sceneIdx}, ${shotIdx}, this.value)\" 
+                                class=\"w-16 h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer\">
+                         <span class=\"text-[9px] font-mono text-blue-400 font-bold w-6\">${shotObj.pacing_multiplier || 1.0}x</span>
+                    </div>
+                    <button onclick=\"lockShot(this, ${sceneIdx}, ${shotIdx})\" class=\"${lockBtnClass} hover:text-amber-400 transition-colors\" title=\"Director's Lock\">${lockBtnIcon}</button>
+                    <span id=\"shotDur-${sceneIdx}-${shotIdx}\" class=\"text-xs font-mono text-slate-400 font-black bg-slate-800 px-3 py-1 rounded-lg\">${duration}S</span>
+                </div>
+            </div>
+            <p class=\"text-slate-200 text-sm leading-relaxed mb-4 font-medium italic border-l-2 border-slate-700 pl-4 py-1\">\"${primary.cinematic_reasoning || ''}\"</p>
+            <div class=\"pt-4 border-t border-white/5 text-[9px] font-black text-blue-400 uppercase tracking-widest\">
+                🎥 REF: ${primary.director_reference || ''} • ${primary.movie_reference || ''}
+            </div>
+            ${alternativesHTML}
+        </div>`;
+}
+
+
+
+
+function updateScenePacing(sceneIdx, newPacing) {
+    if(!window.currentAnalysisData) return;
+    const scene = window.currentAnalysisData.analysis[sceneIdx];
+    const oldPacing = scene.pacing_multiplier || 1.0;
+    scene.pacing_multiplier = parseFloat(newPacing);
+    
+    // Approximate new duration (only action changes, but we scale overall for instant feedback)
+    const ratio = scene.pacing_multiplier / oldPacing;
+    scene.scene_duration_seconds = Math.max(5, Math.round((scene.scene_duration_seconds || 0) * ratio));
     
     // Capture state of expanded scenes before re-rendering
     const expandedScenes = [];
@@ -1032,9 +1133,8 @@ function swapAlternative(sceneIdx, shotIdx, altIdx) {
         }
     });
 
-    // Re-render dashboard
     renderDashboard(window.currentAnalysisData);
-
+    
     // Restore expanded state
     setTimeout(() => {
         expandedScenes.forEach(idx => {
@@ -1051,21 +1151,8 @@ function swapAlternative(sceneIdx, shotIdx, altIdx) {
                 overlay.style.opacity = '0';
                 overlay.style.display = 'none';
                 
-                // Re-enable transition after snap
                 setTimeout(() => { wrapper.style.transition = 'max-height 700ms ease-in-out'; }, 50);
             }
         });
-    }, 10); // Short delay to allow DOM to settle
-}
-
-function lockShot(btnElement) {
-    if(btnElement.classList.contains('text-amber-400')) {
-        btnElement.classList.remove('text-amber-400');
-        btnElement.classList.add('text-slate-500');
-        btnElement.innerText = '🔒';
-    } else {
-        btnElement.classList.remove('text-slate-500');
-        btnElement.classList.add('text-amber-400');
-        btnElement.innerText = '🔐';
-    }
+    }, 10);
 }

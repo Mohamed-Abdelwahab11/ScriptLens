@@ -1,8 +1,8 @@
 {
   "version": "1.0",
   "description": "Learned genre-specific pacing multipliers. Updated by the /calibrate endpoint based on error rate comparisons.",
-  "last_updated": "2026-05-03T23:39:51.092039",
-  "total_calibrations_run": 1,
+  "last_updated": "2026-05-04T01:44:40.292490",
+  "total_calibrations_run": 4,
   "genre_multipliers": {
     "Action": 1.0,
     "Adventure": 1.0,
@@ -12,10 +12,10 @@
     "Documentary": 1.0,
     "Drama": 1.0,
     "Fantasy": 1.0,
-    "Horror": 1.0,
+    "Horror": 0.945,
     "Music": 1.0,
     "Mystery": 1.0,
-    "Romance": 1.156,
+    "Romance": 1.475,
     "Sci-Fi": 1.0,
     "Thriller": 1.0,
     "Western": 1.0,
@@ -49,6 +49,39 @@
       "mape_percent": 60.95,
       "old_multiplier": 1.0,
       "new_multiplier": 1.156,
+      "reference_film": "La La Land"
+    },
+    {
+      "timestamp": "2026-05-04T00:43:32.440913",
+      "film": "auto-calibration",
+      "genre": "Horror",
+      "predicted_min": 376.8,
+      "expected_min": 169.7,
+      "mape_percent": 122.0,
+      "old_multiplier": 1.0,
+      "new_multiplier": 0.945,
+      "reference_film": "Midsommar"
+    },
+    {
+      "timestamp": "2026-05-04T01:12:17.975436",
+      "film": "auto-calibration",
+      "genre": "Romance",
+      "predicted_min": 16.8,
+      "expected_min": 41.0,
+      "mape_percent": 59.12,
+      "old_multiplier": 1.156,
+      "new_multiplier": 1.323,
+      "reference_film": "La La Land"
+    },
+    {
+      "timestamp": "2026-05-04T01:44:40.292464",
+      "film": "auto-calibration",
+      "genre": "Romance",
+      "predicted_min": 19.1,
+      "expected_min": 41.0,
+      "mape_percent": 53.52,
+      "old_multiplier": 1.323,
+      "new_multiplier": 1.475,
       "reference_film": "La La Land"
     }
   ]
