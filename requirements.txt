@@ -12,6 +12,7 @@ pymupdf
 fastapi
 uvicorn
 groq
+openai
 python-dotenv
 
 # Interface

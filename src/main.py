@@ -1,7 +1,7 @@
 import hashlib
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
-from groq import AsyncGroq
+from openai import AsyncOpenAI
 import json
 import os
 import math
@@ -55,7 +55,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-client = AsyncGroq(api_key=os.getenv("GROQ_API_KEY"))
+client = AsyncOpenAI(
+    api_key=os.getenv("AGENT_ROUTER_API_KEY"),
+    base_url="https://agentrouter.org/v1"
+)
 
 async def process_chunk(chunk_text: str, logline: str, current_memory: str, pacing_bias: float, model_name: str, location_list_str: str):
     """AI Core: Generates cinematic breakdown for a script chunk with strict location constraints."""
@@ -153,12 +156,19 @@ async def process_chunk(chunk_text: str, logline: str, current_memory: str, paci
                 model=model_name,
                 messages=[{"role": "user", "content": prompt}],
                 response_format={"type": "json_object"},
-                temperature=0.2
+                temperature=0.2,
+                max_tokens=4000
             )
-            return json.loads(completion.choices[0].message.content)
+            raw_content = completion.choices[0].message.content
+            # Claude sometimes wraps JSON in markdown code blocks — strip it
+            raw_content = raw_content.strip()
+            if raw_content.startswith("```"):
+                raw_content = re.sub(r"^```(?:json)?\n?", "", raw_content)
+                raw_content = re.sub(r"\n?```$", "", raw_content)
+            return json.loads(raw_content)
         except Exception as e:
             error_str = str(e).lower()
-            if "rate_limit_exceeded" in error_str or "429" in error_str:
+            if "rate_limit" in error_str or "429" in error_str or "too many" in error_str:
                 if attempt < max_retries - 1:
                     wait_time = base_delay * (2 ** attempt)
                     print(f"[ML] Rate limit reached (TPM limit). Retrying in {wait_time}s...")
@@ -169,10 +179,63 @@ async def process_chunk(chunk_text: str, logline: str, current_memory: str, paci
             else:
                     raise e
 
+def count_scene_words(text: str) -> tuple:
+    """
+    Correctly separates dialogue words from action words.
+    Returns (dialogue_words, action_words).
+    """
+    lines = text.split('\n')
+    dialogue_words = 0
+    action_words = 0
+    in_dialogue = False
+
+    for line in lines:
+        stripped = line.strip()
+        if not stripped:
+            in_dialogue = False
+            continue
+
+        # Skip scene headers
+        if re.match(r'^(?:INT\.|EXT\.|INT/EXT\.|I/E\.)', stripped, re.IGNORECASE):
+            in_dialogue = False
+            continue
+
+        # Skip transitions
+        if re.match(r'^(?:FADE IN:|FADE OUT\.|CUT TO:|DISSOLVE TO:|SMASH CUT:|MATCH CUT:)', stripped, re.IGNORECASE):
+            in_dialogue = False
+            continue
+
+        # Skip parentheticals — (Aside.) (To MAN.) etc.
+        if stripped.startswith('(') and stripped.endswith(')'):
+            continue
+
+        # Character name cue: ALL CAPS, 1-4 words, no punctuation
+        if stripped.isupper() and 1 <= len(stripped.split()) <= 4 and ':' not in stripped:
+            in_dialogue = True
+            continue
+
+        # Inline character cue: "WOMAN: Hello there"
+        colon_match = re.match(r'^([A-Z][A-Z\s]{0,20}):\s+(.+)$', stripped)
+        if colon_match:
+            rest = colon_match.group(2).strip()
+            rest = re.sub(r'\([^)]*\)\s*', '', rest).strip()
+            if rest:
+                dialogue_words += len(rest.split())
+            in_dialogue = True
+            continue
+
+        if in_dialogue:
+            dialogue_words += len(stripped.split())
+        else:
+            action_words += len(stripped.split())
+
+    return max(0, dialogue_words), max(1, action_words)
+
 def count_actionable_words(text: str) -> int:
     """Strips non-actionable script formatting and returns the true word count."""
-    parsed = parse_scene_words(text)
-    return parsed["total_actionable"]
+    d, a = count_scene_words(text)
+    return d + a
+
 
 def extract_scene_locations(script_text: str) -> list:
     """Strictly extracts locations from INT./EXT. headers only to prevent dialogue-based hallucinations."""
@@ -256,7 +319,7 @@ async def run_analysis_logic(data: dict, websocket: WebSocket = None):
     # ══════════════════════════════════════════════════════════
     # We include a LOGIC_VERSION so that if we update the prompt or parser, 
     # the cache automatically invalidates.
-    LOGIC_VERSION = "v4"
+    LOGIC_VERSION = "v5"
     combined_hash_input = f"{script_text}_{LOGIC_VERSION}"
     script_hash = hashlib.md5(combined_hash_input.encode('utf-8')).hexdigest()
     
@@ -311,46 +374,44 @@ async def run_analysis_logic(data: dict, websocket: WebSocket = None):
     pacing_bias = genre_multipliers.get(genre, genre_multipliers.get("default", 1.5))
     print(f"[ML] Using pacing bias: {pacing_bias:.2f}x for genre: {genre}")
 
-    # 1. Smart Model Downgrade for Free Tier Limits
-    if len(script_text) > 10000:
-        model_name = "llama-3.1-8b-instant"
-        print(f"[ML] Large script detected ({len(script_text)} chars). Switching to {model_name} to bypass TPM limits.")
-    else:
-        model_name = "llama-3.3-70b-versatile"
-        print(f"[ML] Short script detected ({len(script_text)} chars). Using high-quality model: {model_name}.")
+    # Agent Router model strategy: Claude Haiku for speed and JSON reliability
+    model_name = "claude-haiku-4-5-20251001"
+    print(f"[ML] Using Claude Haiku via Agent Router ({len(script_text)} chars).")
 
-    # 2. Chunking
-    chunk_size = 3000
+    # 2. Chunking — FIX B5: single chunk for short scripts
+    chunk_size = 6000
     overlap_size = 500
     chunks_with_context = []
-    
-    for i in range(0, len(script_text), chunk_size):
-        chunk_text = script_text[i:i+chunk_size]
-        prev_context = script_text[max(0, i-overlap_size):i] if i > 0 else "None. This is the very beginning of the script."
-        chunks_with_context.append((chunk_text, prev_context))
 
-    # BUG 3 FIX: Sequential processing to maintain narrative memory order
+    if len(script_text) <= 8000:
+        chunks_with_context = [(script_text, "None. This is the very beginning of the script.")]
+        print(f"[ML] Short script ({len(script_text)} chars) — single chunk mode.")
+    else:
+        for i in range(0, len(script_text), chunk_size):
+            chunk_text = script_text[i:i+chunk_size]
+            prev_context = script_text[max(0, i-overlap_size):i] if i > 0 else "None. This is the very beginning of the script."
+            chunks_with_context.append((chunk_text, prev_context))
+
+    # Sequential processing — preserves narrative memory between chunks (FIX B3)
     raw_results = []
-    current_memory = "None"
+    current_memory = "None. This is the very beginning of the script."
     for chunk, _ in chunks_with_context:
         try:
-            # We add a small delay to respect the API rate limit even sequentially
-            await asyncio.sleep(2.0)
+            await asyncio.sleep(1.5)
             if websocket:
                 await websocket.send_json({
-                    "type": "progress", 
-                    "current_chunk": len(raw_results) + 1, 
-                    "total_chunks": len(chunks_with_context), 
+                    "type": "progress",
+                    "current_chunk": len(raw_results) + 1,
+                    "total_chunks": len(chunks_with_context),
                     "message": f"Processing script block {len(raw_results) + 1} of {len(chunks_with_context)}..."
                 })
             res = await process_chunk(chunk, logline, current_memory, pacing_bias, model_name, location_list_str)
             raw_results.append(res)
-            
             if isinstance(res, dict) and "narrative_memory" in res:
                 current_memory = res["narrative_memory"]
         except Exception as e:
-            raw_results.append(e)
-            print(f"Sequential processing error: {str(e)}")
+            print(f"[ML] Chunk error (skipping): {str(e)}")
+            continue
 
     results = [res for res in raw_results if not isinstance(res, Exception) and isinstance(res, dict)]
     final_analysis = []
@@ -363,67 +424,69 @@ async def run_analysis_logic(data: dict, websocket: WebSocket = None):
             final_analysis.append(scene)
 
     # 2. Dual-Track Cinematic Duration Math
-    
     total_calculated_seconds = 0
     total_dialogue_seconds = 0
     total_action_seconds = 0
     total_overhead_seconds = 0
-    
+
     dampened_global_bias = 1.0 + ((pacing_bias - 1.0) * 0.15)
-    
     genre_wps = calibration.get("words_per_second_by_genre", {}).get(genre, 1.5)
-    
+
+    # FIX B1+B2: compute REAL word counts using the corrected parser
+    total_dialogue_words, total_action_words = count_scene_words(script_text)
+    total_actionable_words = total_dialogue_words + total_action_words
+    total_raw_ai_seconds = sum(
+        sum(shot.get("estimated_seconds", 5) for shot in scene.get("shots", []))
+        for scene in final_analysis
+    )
+    # Accumulators for runtime breakdown
+    total_dialogue_seconds_all = 0
+    total_action_seconds_all = 0
+
     if final_analysis:
-        # Split script by scenes to parse actual words per scene directly from the text
-        scene_blocks = [b for b in re.split(r'(?mi)^(?=INT\.|EXT\.|INT/EXT\.|I/E|داخلي|خارجي)', script_text) if b.strip()]
-        
-        for i, scene in enumerate(final_analysis):
-            # Parse actual scene word count from the corresponding text block
-            scene_text = scene_blocks[i] if i < len(scene_blocks) else ""
-            parsed_words = parse_scene_words(scene_text)
-            
-            # Dual-Track Splitting using EXACT parser data
-            dialogue_words = parsed_words["dialogue"]
-            action_words = parsed_words["action"]
-            overhead_words = parsed_words["overhead"]
-            
-            # 1. Dialogue Track (Human physical speed limit ~2.3 WPS)
-            dialogue_seconds = dialogue_words / 2.3
-            
-            # 2. Action Track (Genre WPS influenced heavily by LLM pacing)
+        for scene in final_analysis:
+            scene_raw_sec = sum(shot.get("estimated_seconds", 5) for shot in scene.get("shots", []))
+            proportion = scene_raw_sec / max(1, total_raw_ai_seconds) if total_raw_ai_seconds > 0 else (1.0 / len(final_analysis))
+
+            # FIX B1+B2: distribute real parsed word counts proportionally per scene
+            scene_dialogue_words = total_dialogue_words * proportion
+            scene_action_words = total_action_words * proportion
+
+            # 1. Dialogue Track - human speech rate 2.3 WPS
+            dialogue_seconds = scene_dialogue_words / 2.3
+
+            # 2. Action Track - no dampening, clamp AI pacing to [0.3, 4.0]
             scene_mult = float(scene.get("pacing_multiplier", 1.0))
-            # BUG 2 FIX: Remove dampening that kills AI analysis. Trust the AI and clamp to [0.3, 4.0]
-            dampened_scene_mult = max(0.3, min(4.0, scene_mult))
-            
-            action_seconds = (action_words / genre_wps) * dampened_scene_mult
-            overhead_seconds = overhead_words / 2.5
-            
+            scene_mult = max(0.3, min(4.0, scene_mult))
+            action_seconds = (scene_action_words / max(0.1, genre_wps)) * scene_mult
+
+            total_dialogue_seconds_all += dialogue_seconds
+            total_action_seconds_all += action_seconds
             total_dialogue_seconds += dialogue_seconds
             total_action_seconds += action_seconds
-            total_overhead_seconds += overhead_seconds
-            
+
             # Combine and apply global bias
-            exact_scene_duration = max(5, int((dialogue_seconds + action_seconds + overhead_seconds) * dampened_global_bias))
-            
+            exact_scene_duration = max(5, int((dialogue_seconds + action_seconds) * dampened_global_bias))
+
             scene["scene_duration_seconds"] = exact_scene_duration
             total_calculated_seconds += exact_scene_duration
-            
-            # Ensure the sum of the shots exactly matches the scene duration
+
+            # Ensure shots sum matches scene duration
             scene_shots = scene.get("shots", [])
             if scene_shots:
                 shot_sum = sum(shot.get("estimated_seconds", 5) for shot in scene_shots)
                 if shot_sum > 0:
                     shot_scale = exact_scene_duration / shot_sum
                     final_shots = []
-                    
+
                     for shot in scene_shots:
                         shot_time = max(1, int(shot.get("estimated_seconds", 5) * shot_scale))
                         if shot_time > 10:
                             num_splits = math.ceil(shot_time / 8.0)
                             base_time = shot_time // num_splits
                             remainder = shot_time % num_splits
-                            
-                            # BUG 4 FIX: Pick split types based on scene tension_score
+
+                            # FIX B4: split types based on scene tension_score
                             tension = int(scene.get("scene_tension_score", 5))
                             if tension >= 7:
                                 types = ["TRACKING WIDE", "HANDHELD MEDIUM", "DUTCH ANGLE"]
@@ -431,7 +494,7 @@ async def run_analysis_logic(data: dict, websocket: WebSocket = None):
                                 types = ["EXTREME CLOSE UP", "STATIC WIDE", "CLOSE UP"]
                             else:
                                 types = ["WIDE", "MEDIUM", "CLOSE UP"]
-                                
+
                             for i in range(num_splits):
                                 split_shot = shot.copy()
                                 split_shot["estimated_seconds"] = base_time + (1 if i < remainder else 0)
@@ -440,14 +503,13 @@ async def run_analysis_logic(data: dict, websocket: WebSocket = None):
                         else:
                             shot["estimated_seconds"] = shot_time
                             final_shots.append(shot)
-                            
-                    # Force exact match for scene duration to eliminate duration conflicts
+
+                    # Force exact match
                     final_sum = sum(s["estimated_seconds"] for s in final_shots)
                     diff = exact_scene_duration - final_sum
                     if diff != 0 and final_shots:
-                        # Add or subtract difference from the last shot
                         final_shots[-1]["estimated_seconds"] = max(1, final_shots[-1]["estimated_seconds"] + diff)
-                        
+
                     scene["shots"] = final_shots
 
     # ══════════════════════════════════════════════════════════
@@ -586,6 +648,10 @@ async def run_analysis_logic(data: dict, websocket: WebSocket = None):
             "expected_asl": round(expected_asl, 2)
         },
         "runtime_breakdown": {
+            "dialogue_seconds": int(total_dialogue_seconds_all * dampened_global_bias),
+            "action_seconds": int(total_action_seconds_all * dampened_global_bias),
+            "overhead_seconds": max(0, total_calculated_seconds - int(total_dialogue_seconds_all * dampened_global_bias) - int(total_action_seconds_all * dampened_global_bias)),
+            "total_seconds": total_calculated_seconds,
             "dialogue_minutes": round(total_dialogue_seconds / 60, 1),
             "action_minutes": round(total_action_seconds / 60, 1),
             "overhead_minutes": round(total_overhead_seconds / 60, 1)

@@ -106,6 +106,10 @@ async function runAnalysis() {
                 if (data.analysis && data.analysis.length > 0) {
                     document.getElementById('totalDurationText').innerText = "Calculating...";
                     window.currentAnalysisData = data;
+                    window.lastAnalysisData = JSON.parse(JSON.stringify(data));
+                    window.lastAnalysisData.analysis.forEach(scene => {
+                        scene._original_duration_seconds = scene.scene_duration_seconds;
+                    });
                     renderDashboard(data);
                     analyticsSection.classList.remove('hidden');
                     resultsContainer.classList.remove('hidden');
@@ -600,7 +604,7 @@ function renderDashboard(data) {
                         <div class="mt-2 flex items-center gap-3 bg-black/20 p-2 rounded-lg border border-white/5 inline-flex">
                             <span class="text-[9px] font-black text-slate-500 uppercase tracking-widest">Director Pacing Override:</span>
                             <input type="range" min="0.3" max="4.0" step="0.1" value="${pm}" 
-                                   oninput="document.getElementById('pacingVal-${sIdx}').innerText = this.value + 'x'"
+                                   oninput="applyPacingOverride(${sIdx}, this.value); document.getElementById('pacingVal-${sIdx}').innerText = parseFloat(this.value).toFixed(1) + 'x'"
                                    onchange="updateScenePacing(${sIdx}, this.value)" 
                                    class="w-24 h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer">
                             <span id="pacingVal-${sIdx}" class="text-[10px] font-mono text-blue-400 font-bold w-6">${pm}x</span>
@@ -609,7 +613,7 @@ function renderDashboard(data) {
                         <p class="text-xs text-blue-400 font-bold uppercase tracking-widest">${(scene.characters || []).join(' • ')}</p>
                         <div class=\"pt-4 border-t border-slate-700/50\">
                             <p class=\"text-[10px] text-slate-400 uppercase tracking-widest font-black mb-1\">Estimated Duration</p>
-                            <p id=\"sceneDurLabel-${sIdx}\" class=\"text-xl font-mono text-white font-black\">${Math.floor((scene.scene_duration_seconds || 0)/60)}m ${(scene.scene_duration_seconds || 0)%60}s</p>
+                            <p id=\"sceneDurLabel-${sIdx}\" class=\"scene-duration-display text-xl font-mono text-white font-black\">${Math.floor((scene.scene_duration_seconds || 0)/60)}m ${(scene.scene_duration_seconds || 0)%60}s</p>
                         </div>
                     </div>
                     <div class="lg:col-span-3 relative">
@@ -680,13 +684,18 @@ function renderDashboard(data) {
     const rangeText = data.estimated_runtime_range ? `EST: ${data.estimated_runtime_range}` : 'Calculating...';
     document.getElementById('totalDurationText').innerHTML = `${rangeText} <span class="text-lg text-slate-500 ml-2">(${formatTime(totalFilmSeconds)})</span>`;
     
-    // Runtime Breakdown
+    // Runtime Breakdown — FIX F4: use seconds-based fields from API
     const breakdownEl = document.getElementById('runtimeBreakdown');
     if (data.runtime_breakdown && breakdownEl) {
         breakdownEl.classList.remove('hidden');
-        document.getElementById('bdDialogue').innerText = data.runtime_breakdown.dialogue_minutes + 'm';
-        document.getElementById('bdAction').innerText = data.runtime_breakdown.action_minutes + 'm';
-        document.getElementById('bdOverhead').innerText = data.runtime_breakdown.overhead_minutes + 'm';
+        const rb = data.runtime_breakdown;
+        const toMin = s => Math.round((s || 0) / 60);
+        const dialogueEl = document.getElementById('bdDialogue');
+        const actionEl = document.getElementById('bdAction');
+        const overheadEl = document.getElementById('bdOverhead');
+        if (dialogueEl) dialogueEl.innerText = (rb.dialogue_minutes || toMin(rb.dialogue_seconds)) + 'M';
+        if (actionEl) actionEl.innerText = (rb.action_minutes || toMin(rb.action_seconds)) + 'M';
+        if (overheadEl) overheadEl.innerText = (rb.overhead_minutes || toMin(rb.overhead_seconds)) + 'M';
     } else if (breakdownEl) {
         breakdownEl.classList.add('hidden');
     }
@@ -958,6 +967,9 @@ function updateCharts(c, d) {
 
 function swapAlternative(sceneIdx, shotIdx, altIdx) {
     if(!window.currentAnalysisData) return;
+    // FIX F3: block swap if shot is locked via DOM
+    const shotCard = document.getElementById(`shotCard-${sceneIdx}-${shotIdx}`);
+    if (shotCard && shotCard.dataset.locked === 'true') return;
     
     const scene = window.currentAnalysisData.analysis[sceneIdx];
     const shot = scene.shots[shotIdx];
@@ -1156,3 +1168,62 @@ function updateScenePacing(sceneIdx, newPacing) {
         });
     }, 10);
 }
+
+// ============================================================
+// FIX F2: Director Pacing Override — actually updates runtime
+// ============================================================
+window.applyPacingOverride = function(sceneIdx, multiplierValue) {
+    if (!window.lastAnalysisData) return;
+    const scene = window.lastAnalysisData.analysis[sceneIdx];
+    if (!scene) return;
+
+    const original = scene._original_duration_seconds || scene.scene_duration_seconds;
+    const newDuration = Math.max(5, Math.round(original * parseFloat(multiplierValue)));
+    scene.scene_duration_seconds = newDuration;
+
+    // Update scene duration display
+    const durationEl = document.querySelector(`#scene-block-${sceneIdx} .scene-duration-display`);
+    if (durationEl) {
+        durationEl.textContent = `${Math.floor(newDuration / 60)}m ${newDuration % 60}s`;
+    }
+
+    // Also update the linked label
+    const labelEl = document.getElementById(`sceneDurLabel-${sceneIdx}`);
+    if (labelEl) {
+        labelEl.textContent = `${Math.floor(newDuration / 60)}m ${newDuration % 60}s`;
+    }
+
+    // Recalculate total runtime from all scenes
+    const totalSeconds = window.lastAnalysisData.analysis
+        .reduce((sum, s) => sum + (s.scene_duration_seconds || 0), 0);
+    const displayMins = Math.floor(totalSeconds / 60);
+    const displaySecs = String(totalSeconds % 60).padStart(2, '0');
+    const totalMins = Math.round(totalSeconds / 60);
+
+    const totalDurationEl = document.getElementById('totalDurationText');
+    if (totalDurationEl) {
+        totalDurationEl.innerHTML = `EST: ~${totalMins} Min <span class="text-lg text-slate-500 ml-2">(${displayMins}:${displaySecs})</span>`;
+    }
+};
+
+// ============================================================
+// FIX F3: lockShot — actually blocks swapAlternative
+// ============================================================
+window.lockShot = function(btn, sceneIdx, shotIdx) {
+    const isLocked = btn.dataset.locked === 'true';
+    const shotCard = document.getElementById(`shotCard-${sceneIdx}-${shotIdx}`);
+
+    if (isLocked) {
+        btn.dataset.locked = 'false';
+        btn.style.color = '';
+        btn.title = "Director's Lock";
+        btn.textContent = '🔒';
+        if (shotCard) shotCard.dataset.locked = 'false';
+    } else {
+        btn.dataset.locked = 'true';
+        btn.style.color = '#f59e0b';
+        btn.title = "Locked — click to unlock";
+        btn.textContent = '🔐';
+        if (shotCard) shotCard.dataset.locked = 'true';
+    }
+};
