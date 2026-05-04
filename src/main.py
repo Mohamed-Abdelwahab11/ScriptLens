@@ -10,7 +10,9 @@ import re
 from datetime import datetime
 from dotenv import load_dotenv
 
-load_dotenv()
+# Load .env from project root (handles uvicorn subprocess working dir changes)
+_PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+load_dotenv(os.path.join(_PROJECT_ROOT, '.env'))
 app = FastAPI()
 
 # ─── File Paths ──────────────────────────────────────────────
@@ -55,10 +57,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-client = AsyncOpenAI(
-    api_key=os.getenv("AGENT_ROUTER_API_KEY"),
-    base_url="https://agentrouter.org/v1"
-)
+def _get_client():
+    """Lazy client factory — reads key after dotenv is guaranteed loaded."""
+    api_key = os.getenv("AGENT_ROUTER_API_KEY") or os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise RuntimeError("AGENT_ROUTER_API_KEY not set in environment or .env file")
+    return AsyncOpenAI(
+        api_key=api_key,
+        base_url="https://agentrouter.org/v1"
+    )
+
+client = None  # initialized on first request
 
 async def process_chunk(chunk_text: str, logline: str, current_memory: str, pacing_bias: float, model_name: str, location_list_str: str):
     """AI Core: Generates cinematic breakdown for a script chunk with strict location constraints."""
@@ -308,6 +317,9 @@ async def analyze_script(data: dict):
     return await run_analysis_logic(data)
 
 async def run_analysis_logic(data: dict, websocket: WebSocket = None):
+    global client
+    if client is None:
+        client = _get_client()
     script_text = data.get("script_text", "")
     logline = data.get("logline", "Not provided")
     
